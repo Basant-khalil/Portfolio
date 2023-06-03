@@ -546,6 +546,8 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+  max-height: 200px; /* Adjust the height as desired */
+  overflow-y: auto;
 }
 
 .service-item {
