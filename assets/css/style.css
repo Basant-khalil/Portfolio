@@ -770,19 +770,23 @@ main {
   scroll-padding-inline: 25px;
 }
 
+
+
 .clients-item {
-  min-width: 50%;
+  flex: 0 0 200px; /* Set a fixed width for each item */
   scroll-snap-align: start;
 }
 
 .clients-item img {
   width: 100%;
+  height: auto; /* Preserve the aspect ratio */
   filter: grayscale(1);
   transition: var(--transition-1);
 }
 
-.clients-item img:hover { filter: grayscale(0); }
-
+.clients-item:hover img {
+  filter: grayscale(0);
+}
 
 
 /*-----------------------------------*\
