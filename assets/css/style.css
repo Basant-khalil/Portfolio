@@ -532,30 +532,23 @@ main {
 /**
  * #service 
  */
+.service { margin-bottom: 35px; }
 
-.service {
-  margin-bottom: 35px;
-}
-
-.service-title {
-  margin-bottom: 20px;
-}
+.service-title { margin-bottom: 20px; }
 
 .service-list {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
 .service-item {
-  flex-basis: calc(20px); /* Adjust the width of each item based on your preference */
   position: relative;
   background: var(--border-gradient-onyx);
   padding: 20px;
   border-radius: 14px;
   box-shadow: var(--shadow-2);
   z-index: 1;
-  overflow: hidden; /* Add overflow property to hide content that exceeds container size */
 }
 
 .service-item::before {
@@ -567,23 +560,13 @@ main {
   z-index: -1;
 }
 
-.service-icon-box {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center; /* Center the icon horizontally */
-}
+.service-icon-box { margin-bottom: 10px; }
 
-.service-icon-box img {
-  margin: auto;
-}
+.service-icon-box img { margin: auto; }
 
-.service-content-box {
-  text-align: center;
-}
+.service-content-box { text-align: center; }
 
-.service-item-title {
-  margin-bottom: 7px;
-}
+.service-item-title { margin-bottom: 7px; }
 
 .service-item-text {
   color: var(--light-gray);
@@ -592,10 +575,9 @@ main {
   line-height: 1.6;
 }
 
-.service-item-description {
-  margin-top: 10px; /* Adjust the margin based on your preference */
-  color: var(--light-gray);
-  font-size: var(--fs-7); /* Adjust the font size based on your preference */
+.courses-container {
+  max-height: 400px; /* Adjust the height as desired */
+  overflow-y: auto;
 }
 
 
