@@ -534,7 +534,7 @@ main {
  */
 .service {
   margin-bottom: 35px;
-  max-height: 400px; /* Adjust the height as desired */
+  max-height: 1000px; /* Adjust the height as desired */
   overflow-y: auto;
 }
 
