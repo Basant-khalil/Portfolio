@@ -770,31 +770,20 @@ main {
   scroll-padding-inline: 25px;
 }
 
+
 .clients-item {
+  min-width: 50%;
   scroll-snap-align: start;
 }
 
-.client-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.client-button img {
+.clients-item img {
   width: 120px;
   height: 120px;
   filter: grayscale(1);
   transition: var(--transition-1);
 }
 
-.client-button span {
-  margin-top: 5px;
-}
-
-.client-button:hover img {
-  filter: grayscale(0);
-}
+.clients-item img:hover { filter: grayscale(0); }
 
 
 
