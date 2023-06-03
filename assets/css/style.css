@@ -773,7 +773,7 @@ main {
 
 
 .clients-item {
-  flex: 0 0 400px; /* Set a fixed width for each item */
+  flex: 0 0 350px; /* Set a fixed width for each item */
   scroll-snap-align: start;
 }
 
