@@ -771,22 +771,18 @@ main {
 }
 
 
-
 .clients-item {
-  flex: 0 0 100px; /* Set a fixed width for each item */
+  min-width: 50%;
   scroll-snap-align: start;
 }
 
 .clients-item img {
   width: 100%;
-  height: auto; /* Preserve the aspect ratio */
   filter: grayscale(1);
   transition: var(--transition-1);
 }
 
-.clients-item:hover img {
-  filter: grayscale(0);
-}
+.clients-item img:hover { filter: grayscale(0); }
 
 
 /*-----------------------------------*\
