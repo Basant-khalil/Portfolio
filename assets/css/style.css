@@ -533,14 +533,17 @@ main {
  * #service 
  */
 
+.service {
+  margin-bottom: 35px;
+}
 
-.service { margin-bottom: 35px; }
-
-.service-title { margin-bottom: 20px; }
+.service-title {
+  margin-bottom: 20px;
+}
 
 .service-list {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust the width of the columns based on your preference */
   gap: 20px;
 }
 
@@ -551,6 +554,7 @@ main {
   border-radius: 14px;
   box-shadow: var(--shadow-2);
   z-index: 1;
+  overflow: hidden; /* Add overflow property to hide content that exceeds container size */
 }
 
 .service-item::before {
@@ -562,13 +566,23 @@ main {
   z-index: -1;
 }
 
-.service-icon-box { margin-bottom: 10px; }
+.service-icon-box {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center; /* Center the icon horizontally */
+}
 
-.service-icon-box img { margin: auto; }
+.service-icon-box img {
+  margin: auto;
+}
 
-.service-content-box { text-align: center; }
+.service-content-box {
+  text-align: center;
+}
 
-.service-item-title { margin-bottom: 7px; }
+.service-item-title {
+  margin-bottom: 7px;
+}
 
 .service-item-text {
   color: var(--light-gray);
@@ -576,6 +590,15 @@ main {
   font-weight: var(--fw-3);
   line-height: 1.6;
 }
+
+.service-item-description {
+  margin-top: 10px; /* Adjust the margin based on your preference */
+  color: var(--light-gray);
+  font-size: var(--fs-7); /* Adjust the font size based on your preference */
+}
+
+
+
 
 
 /**
