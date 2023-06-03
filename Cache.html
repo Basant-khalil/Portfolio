@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=500px, initial-scale=3.0">
+  <title>BasantKhalil</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Basant Khalil" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Basant khalil">Basant Khalil</h1>
+
+          <p class="title"> Software Engineer<br> Electrical&Computer Engineer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:bak94@cornell.edu" class="contact-link">bak94@cornell.edu</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+6147178842" class="contact-link">+1 (614) 717-8842</a>
+            </div>
+
+          </li>
+          
+           <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+
+              <a href="https://github.com/Basant-khalil" class="contact-link">https://github.com/Basant-khalil</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Columbus, Ohio, USA</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://github.com/Basant-khalil" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="www.linkedin.com/in/basant-khalil" class="social-link">
+              <ion-icon name="logo-linkedIn"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+<div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+	<li>
+          <button class="navbar-link active" data-nav-link onclick="window.location.href='https://pages.github.coecis.cornell.edu/bak94/basantKhalil/#'">Back</button>
+        </li>
+
+        </ul>
+
+      </nav>
+
+
+      <!-------------------------------------------------------------------- Article Text -------------------------------------------------------------------->
+      <article class="about  active" data-page="Cache">
+        <header>
+          <h2 class="h2 article-title">Blocking Cache</h2>
+        </header>
+        <section class="about-text">
+          <p>
+            The report attached below describes a study on processor performance and memory latency. The primary objective of the study is to investigate the impact of cache memory on processor performance, particularly with regard to memory access latency. 
+            I will discuss the details of the design and synthesis of two cache architectures - a direct-mapped cache and a two-way set-associative cache - each with a capacity of 256B and then evaluate the performance of each design using simulation testing.
+          </p>
+          <p>
+           The baseline design of the cache is a 256B direct-mapped, write-back, write-allocate cache. It is split into control, datapath, and top-level modules to enforce modularity, hierarchy, and encapsulation design principles. The control module is managed by a finite state machine (FSM) controller, which handles states with one or more steps per state during which control signals are sent out to the datapath and status signals are received in return. 
+           Included below are state machine and datapath diagrams for the baseline design, which show the different paths taken by the cache for various transactions.
+          </p>
+
+		
+		
+	<div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/cache1.png" id="rcimage1" alt="Custom Kitchen"
+   	 style="max-width:50%;border:2px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/cache2.JPG" id="rcimage2" alt="Custom Kitchen"
+   	 style="max-width:50%;border:2px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
+
+
+	
+          <p>
+            The report also describes the interface for the direct-mapped cache, which consists of various inputs and outputs. The inputs include the clock and reset signals, the test source/cache request message and valid signal, cache response ready signal (from the test sink/processor), memory request ready signal, and the memory response message and valid signal. 
+            The outputs include the cache request ready signal, cache response message and valid signal, memory request message and valid signal, as well as the memory response ready signal.
+          </p>
+          <p>
+           I first fully creating the datapath and then added the different paths: init transaction, read hit path, write hit path, refill path, and evict path. The cache is write-back, write-allocate, which means it writes only to the cache on a write hit and loads the cache line from memory (and then writes to the cache) on a write miss. 
+           Additionally, I maintained two register files in the control module for keeping track of valid and dirty cache lines, which are necessary for determining whether evictions are required on cache read/write misses.
+          </p>
+
+	        <p>
+            I then describe the alternative design of the cache, which is a 256B two-way write-back, write-allocate set-associative cache. The alternative design is also split into control, datapath, and top-level modules, with control being managed by a FSM controller. 
+            The alternative design has a least recently used (LRU) replacement policy for choosing which cache lines to replace on read/write misses. 
+            Included below are the state machine and datapath diagrams for the alternative design, which show the modifications made to the baseline design to create the alternative design, such as duplicating the tag array and tag check logic, having different valid, dirty, and count (for LRU) register files for each way, and implementing logic to determine which way to write to and to implement the LRU replacement policy. 
+            I also tried to improve the modularity of their design by refactoring the tag/data arrays and output logic into separate “way modules.”
+          </p>	  
+	<div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/cache3.JPG" id="rcimage1" 
+   	 style="max-width:50%;border:2px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/cache4.png" id="rcimage2" 
+   	 style="max-width:50%;border:2px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
+
+	<center>
+		 <img src="assets/images/cache5.jpg" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:2px solid #F1D16C;">
+	</center>
+        
+        
+
+	      <p>
+          Finally, I evaluate the performance of the baseline and alternative cache designs using simulation testing. 
+          The simulator harness was built and run using given datasets, as well as datasets added, to generate the total number of cycles and the average number of cycles per transaction for each design. 
+          Finally, I conclude that I expect an improvement in the average memory access latency for the two-way set-associative cache design over the direct-mapped cache design, due to the reduced conflict misses with the set-associative cache.
+         </p>	
+	<center>
+		<img src="assets/images/cache6.png" id="rcimage1" alt="Custom Kitchen"
+   	 style="max-width:90%;border:2px solid #F1D16C; height: 300px; object-fit: contain;">
+	</center>
+		
+	
+        </section>
+      </article>
+    </div>
+  </main>
+
+	
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

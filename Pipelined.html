@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=500px, initial-scale=3.0">
+  <title>BasantKhalil</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Basant Khalil" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Basant khalil">Basant Khalil</h1>
+
+          <p class="title"> Software Engineer<br> Electrical&Computer Engineer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:bak94@cornell.edu" class="contact-link">bak94@cornell.edu</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+6147178842" class="contact-link">+1 (614) 717-8842</a>
+            </div>
+
+          </li>
+          
+           <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+
+              <a href="https://github.com/Basant-khalil" class="contact-link">https://github.com/Basant-khalil</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Columbus, Ohio, USA</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://github.com/Basant-khalil" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="www.linkedin.com/in/basant-khalil" class="social-link">
+              <ion-icon name="logo-linkedIn"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+<div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+	<li>
+          <button class="navbar-link active" data-nav-link onclick="window.location.href='https://pages.github.coecis.cornell.edu/bak94/basantKhalil/#'">Back</button>
+        </li>
+
+        </ul>
+
+      </nav>
+
+
+      <!-------------------------------------------------------------------- Article Text -------------------------------------------------------------------->
+      <article class="about  active" data-page="Pipelined">
+        <header>
+          <h2 class="h2 article-title">Pipelined Processor</h2>
+        </header>
+        <section class="about-text">
+          <p>
+           In modern computer systems, the need for high performance and efficiency is essential. One way to improve the CPU's performance is by exploiting instruction-level parallelism (ILP) through a pipelined processor. 
+	   Pipelining involves breaking down the datapath and control into multiple stages, each separated by buffer registers. The potential speedup of a pipelined processor is proportional to the number of pipeline stages. 
+In this lab, I synthesized a 5-stage pipelined processor that supports the PARCv2 Instruction Set Architecture (ISA).
+          </p>
+          <p>
+           The project involved implementing a baseline pipelined design of the 5-stage processor and an alternative, fully bypassed design. Bypassing allows for data dependencies to be resolved by using special bypass paths from the execute (X), memory access (M), and register write-back (W) stages back to the decode (D) stage. 
+	   These paths allow for data dependencies to be resolved within the same cycle, thereby eliminating the need to stall for most instructions (lw and sw being two exceptions). 
+	  I expected the bypassed design to show an improvement in transaction throughput over the baseline design.
+          </p>
+          <p>
+           The baseline design for this lab is a 5-stage pipelined processor with support for stalling and squashing of instructions using pipe control modules for each stage. 
+		  Rather than have a state machine diagram, I  have a diagram illustrating the datapath and control for the processor. The baseline design was divided into datapath, control, and top-level modules due to the level of complexity. 
+		  I was initially given a basic version of the baseline implementation that supported the addu, addiu, lw, bne, and j instructions. As I incrementally added instructions, I updated the datapath and control modules accordingly to support them.
+          </p>
+	 <center><img src="assets/images/pipelined.jpg" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+          </center>
+          <p>
+            The last instruction I worked on implementing was the mul instruction. The original baseline datapath I was given did not contain a multiplier, as shown in Figure 2. I added the variable-latency integer multiplier into this datapath, as shown below. 
+          </p>
+	  <p>
+	    Two modifications I needed to add over the PARCv1 implementation was sending requests/data a cycle early and implementing a val-ready interface for both instruction/data memory requests and the multiplier. The first modification was intended to save time by sending instruction/data memory requests at the end of the X stage instead of the beginning of the M stage, so we could get back a response from memory at the end of the M stage (assuming a one-cycle memory delay). 
+		  Similarly, I could save a cycle by sending multiplier data inputs at the end of the D stage instead of the beginning of the X stage so that I get the multiplier output at the end of the X stage, assuming a multiplier with a one-cycle delay. The val/ready interfaces for instruction/data memory requests and the multiplier allow for a wide range of memory systems and multipliers with varying latencies to be connected to the circuit.
+	  </p>
+	  <center><img src="assets/images/pipelined2.jpg" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+         </center>
+	  <p>
+            I then presented an alternative design for a 5-stage pipelined processor with 3 bypass paths from the X, M, and W stages back to D. The main modifications made to the baseline datapath were the addition of the bypass paths and corresponding muxes. 
+		 The control logic was also updated to account for the bypass paths by modifying the stall and squash signals. The bypass paths reduce the number of stall/squash signals required as data is transfered combinationally between the X/M/W stages and the D stage to resolve redundancies.
+          </p>	
+	<p>
+          There is an additional modification made to the control module to support bypassing. The control signal identifies data dependencies by checking instruction valid and register enable signals from the buffer registers at the X, M, and W stages. However, the lw instruction is the only instruction that is ready not at the end of the X stage but rather at the end of the M stage (after memory is read back). 
+		Hence, there was no way to identify lw data dependencies unless the instruction was also checked at the D stage, which was added to the control logic.
+          </p>	
+<center>
+	 <img src="assets/images/pipelined3.jpg" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+	 <p>
+          The testing strategy for the lab included writing and testing directed tests for all PARCv2 instructions on the ISA Simulator incrementally. The directed tests were grouped into four categories: Basic, Bypassing, Value, and Stalls/Bubbles. The basic tests featured 5 nops between regular instructions, while the bypassing tests tested various (simple) inputs by varying the number of nops between instructions (usually 0-5) to create different data dependencies. 
+		 The value tests focused on testing all possible input values and were further broken down into arithmetic and source/destination (testing src==dest) tests. The long tests tested stalls and bubbles by sending out a large number of instructions with data dependencies (and no nops in between) to ensure that stalls and bubbles were generated correctly and that the instructions actually finished executing.
+         </p>
+	  <p>
+		  The directed test cases covered all types of possible inputs, including zeros and ones, small and large numbers, positive and negative numbers, and combinations of these. The magnitude of the inputs was also varied considerably from 0 to 32 bits (even though the bit width of all the inputs is 32). Test source/sink delays were added to the stall/bubble (long) tests that tested the val/rdy microprotocol. The test case inputs were varied according to the instruction they were testing. 
+		  Provided below is a summary of all the different types of test cases in Table 7.
+	  </p>
+	<center><img src="assets/images/pipelined4.jpg" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:2px solid #F1D16C;">
+     </center>
+
+        </section>
+      </article>
+    </div>
+  </main>
+
+	
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
