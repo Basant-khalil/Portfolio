@@ -542,12 +542,13 @@ main {
 }
 
 .service-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust the width of the columns based on your preference */
+  display: flex;
+  justify-content: space-between;
   gap: 20px;
 }
 
 .service-item {
+  flex-basis: calc(20px); /* Adjust the width of each item based on your preference */
   position: relative;
   background: var(--border-gradient-onyx);
   padding: 20px;
@@ -596,7 +597,6 @@ main {
   color: var(--light-gray);
   font-size: var(--fs-7); /* Adjust the font size based on your preference */
 }
-
 
 
 
