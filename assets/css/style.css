@@ -590,11 +590,27 @@ main {
   font-weight: var(--fw-3);
   line-height: 1.6;
 }
-
-
-.courses-container {
-  max-height: 400px; /* Adjust the height as desired */
+.service-container.has-scrollbar {
   overflow-y: auto;
+}
+
+.service-container.has-scrollbar::-webkit-scrollbar {
+  width: 5px; /* for vertical scrollbar */
+  height: 5px; /* for horizontal scrollbar */
+}
+
+.service-container.has-scrollbar::-webkit-scrollbar-track {
+  background: var(--onyx);
+  border-radius: 5px;
+}
+
+.service-container.has-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--orange-yellow-crayola);
+  border-radius: 5px;
+}
+
+.service-container.has-scrollbar::-webkit-scrollbar-button {
+  width: 20px;
 }
 
 
