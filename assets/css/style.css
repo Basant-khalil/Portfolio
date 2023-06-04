@@ -551,7 +551,7 @@ main {
  * #service 
  */
 .service { margin-bottom: 35px; 
-  height: 50px;
+  height: 1000px;
   overflow-y: scroll;}
 
 .service-title { margin-bottom: 20px; }
