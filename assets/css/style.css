@@ -545,11 +545,13 @@ main {
 .service-item {
   position: relative;
   background: var(--border-gradient-onyx);
-  padding: 10px; /* Adjust the padding as per your preference */
+  padding: 5px; /* Adjust the padding as per your preference */
   border-radius: 14px;
   box-shadow: var(--shadow-2);
   z-index: 1;
 }
+
+
 
 .service-item::before {
   content: "";
