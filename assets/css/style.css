@@ -553,7 +553,6 @@ main {
  */
 .service { margin-bottom: 35px; 
 height: 0px;
-	width: 1000px;
   overflow-y: scroll;}
 
 .service-title { margin-bottom: 20px; }
