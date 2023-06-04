@@ -565,7 +565,12 @@ main {
 
 .service-icon-box { margin-bottom: 10px; }
 
-.service-icon-box img { margin: auto; }
+.service-icon-box img {
+  margin: auto;
+  border: 1px solid #000; /* Add a border around the image */
+  transition: background-color 0.3s ease; /* Add a transition effect for smooth color change */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
 
 .service-content-box { text-align: center; }
 
@@ -578,14 +583,7 @@ main {
   line-height: 1.6;
 }
 
-
-.service-image {
-  border: 1px solid #000; /* Add a border around the image */
-  transition: background-color 0.3s ease; /* Add a transition effect for smooth color change */
-  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
-}
-
-.service-image:hover {
+.service-icon-box img:hover {
   background-color: yellow; /* Change the background color on hover */
 }
 
