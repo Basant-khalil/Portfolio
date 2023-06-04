@@ -259,6 +259,24 @@ article.active {
 
 .has-scrollbar::-webkit-scrollbar-button { width: 20px; }
 
+
+.has-scrollbarv::-webkit-scrollbar {
+  width: 5px; /* for vertical scrollbar */
+  height: 5px; /* for horizontal scrollbar */
+}
+
+.has-scrollbarv::-webkit-scrollbar-track {
+  background: var(--onyx);
+  border-radius: 5px;
+}
+
+.has-scrollbarv::-webkit-scrollbar-thumb {
+  background: var(--orange-yellow-crayola);
+  border-radius: 5px;
+}
+
+.has-scrollbarv::-webkit-scrollbar-button { width: 20px; }
+
 .content-card {
   position: relative;
   background: var(--border-gradient-onyx);
@@ -532,7 +550,9 @@ main {
 /**
  * #service 
  */
-.service { margin-bottom: 35px; }
+.service { margin-bottom: 35px; 
+  height: 50px;
+  overflow-y: scroll;}
 
 .service-title { margin-bottom: 20px; }
 
@@ -1566,7 +1586,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .has-scrollbar::-webkit-scrollbar-button { width: 100px; }
 
 
-
+  .has-scrollbarv::-webkit-scrollbar-button { width: 100px; }
   /**
    * SIDEBAR
    */
