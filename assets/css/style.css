@@ -259,10 +259,8 @@ article.active {
 
 .has-scrollbar::-webkit-scrollbar-button { width: 20px; }
 
-
 .has-scrollbarv::-webkit-scrollbar {
   width: 5px; /* for vertical scrollbar */
-  height: 5px; /* for horizontal scrollbar */
 }
 
 .has-scrollbarv::-webkit-scrollbar-track {
@@ -275,7 +273,10 @@ article.active {
   border-radius: 5px;
 }
 
-.has-scrollbarv::-webkit-scrollbar-button { width: 20px; }
+.has-scrollbarv::-webkit-scrollbar-button {
+  width: 0; /* remove the width for the horizontal scrollbar button */
+}
+
 
 .content-card {
   position: relative;
