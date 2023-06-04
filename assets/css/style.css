@@ -532,22 +532,14 @@ main {
 /**
  * #service 
  */
-.service {
-  margin-bottom: 35px;
-  max-height: 1000px; /* Adjust the height as desired */
-  overflow-y: auto;
-}
+.service { margin-bottom: 35px; }
 
-.service-title {
-  margin-bottom: 20px;
-}
+.service-title { margin-bottom: 20px; }
 
 .service-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  max-height: 200px; /* Adjust the height as desired */
-  overflow-y: auto;
+  grid-template-columns: 0.5fr;
+  gap: 10px;
 }
 
 .service-item {
@@ -568,21 +560,13 @@ main {
   z-index: -1;
 }
 
-.service-icon-box {
-  margin-bottom: 10px;
-}
+.service-icon-box { margin-bottom: 10px; }
 
-.service-icon-box img {
-  margin: auto;
-}
+.service-icon-box img { margin: auto; }
 
-.service-content-box {
-  text-align: center;
-}
+.service-content-box { text-align: center; }
 
-.service-item-title {
-  margin-bottom: 7px;
-}
+.service-item-title { margin-bottom: 7px; }
 
 .service-item-text {
   color: var(--light-gray);
@@ -590,28 +574,7 @@ main {
   font-weight: var(--fw-3);
   line-height: 1.6;
 }
-.service-container.has-scrollbar {
-  overflow-y: auto;
-}
 
-.service-container.has-scrollbar::-webkit-scrollbar {
-  width: 5px; /* for vertical scrollbar */
-  height: 5px; /* for horizontal scrollbar */
-}
-
-.service-container.has-scrollbar::-webkit-scrollbar-track {
-  background: var(--onyx);
-  border-radius: 5px;
-}
-
-.service-container.has-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--orange-yellow-crayola);
-  border-radius: 5px;
-}
-
-.service-container.has-scrollbar::-webkit-scrollbar-button {
-  width: 20px;
-}
 
 
 
