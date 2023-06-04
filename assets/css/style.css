@@ -579,7 +579,15 @@ main {
 }
 
 
+.service-image {
+  border: 1px solid #000; /* Add a border around the image */
+  transition: background-color 0.3s ease; /* Add a transition effect for smooth color change */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
 
+.service-image:hover {
+  background-color: yellow; /* Change the background color on hover */
+}
 
 
 /**
