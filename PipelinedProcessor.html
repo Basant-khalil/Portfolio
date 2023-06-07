@@ -174,14 +174,16 @@
 		  incorporating both stalling and bypassing. Pipelining involves dividing the datapath and control modules into multiple stages using buffer registers, 
 		  which leads to potential speed improvements proportional to the number of pipelined stages. This technique enables the execution of multiple transactions 
 		  simultaneously, resulting in faster cycle times compared to single-stage processors.
-	<br>	  For this project, I designed two 5-stage pipelined processors that support the TinyRV2 ISA. The <font color="gold"><strong>baseline </strong></font> design employed stalling to resolve data hazards, 
-		  while the <font color="gold"><strong>alternative design</strong></font> utilized bypassing to enhance processor performance. Bypassing, achieved through special bypass paths from the Execute stage (X),
-		  Memory stage (M), and Write-Back stage (W) to the Decode stage (D), allows for more efficient resolution of data dependencies, eliminating the need for 
-		  stalling in many cases. Load (lw) and store (sw) instructions are exceptions to bypassing.
+	<br>	  For this project, I designed two  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">5-stage</span> pipelined processors that support the  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">TinyRV2 ISA</span>. 
+		  The <font color="gold"><strong>baseline </strong></font> design employed stalling to resolve data hazards, 
+		  while the <font color="gold"><strong>alternative design</strong></font> utilized bypassing to enhance processor performance. Bypassing, achieved through special bypass paths from the  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Execute</span> stage (X),
+		   <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Memory</span> stage (M), and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Write-back</span> stage (W) to 
+		  the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Decode</span> stage (D), allows for more efficient resolution of data dependencies, eliminating the need for 
+		  stalling in many cases.  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Load (lw)</span> and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Store (sw)</span> instructions are exceptions to bypassing.
 	<br>	  I anticipated improved transaction throughput with the alternative bypassed design compared to the <font color="gold"><strong>baseline </strong></font> design. I successfully implemented both designs,
 		  tested their functionality, and performed evaluations to compare their performance. The <font color="gold"><strong>alternative design</strong></font> featured additional control signals, 
 		  datapath structures, such as two multiplexers, and modifications to the stall and squash signals to accommodate bypassing. The only differences in the 
-		  datapath between the <font color="gold"><strong>alternative</strong></font> and <font color="gold"><strong>baseline</strong></font> designs were the two four-input multiplexers. Although the alternative design included bypassing, it required 
+		  datapath between the <font color="gold"><strong>alternative</strong></font> and <font color="gold"><strong>baseline</strong></font> designs were the two  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">four-input</span> multiplexers. Although the alternative design included bypassing, it required 
 		  fewer stall signals than the <font color="gold"><strong>baseline </strong></font> design, resulting in only a minor increase in cost.
 	<center>
 		<img src="assets/images/pipelined4.jpg" id="frst" class="center"
@@ -189,7 +191,9 @@
 	</center>     
 	<br>	  While the alternative design's cycle time might be slightly longer due to the added bypass paths potentially lengthening the critical path, the increase in 
 		  power consumption would not be significant. The alternative design included a slight increase in complexity due to the additional multiplexers and bypass logic. 
-		  When running five different programs, including vvadd-unopt, vvadd-opt, cmult, bsearch, and mfilt, the alternative design executed fewer cycles than the 
+		  When running five different programs, including  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">vvadd-unopt</span>, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">vvadd-opt</span>,  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">cmult</span>,  
+		  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">bsearch</span>, and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">mfilt</span>, 
+		  the alternative design executed fewer cycles than the 
 		  baseline design in most cases. The alternative design demonstrated better efficiency, saving multiple cycles for programs and exhibiting lower CPI on average 
 		  compared to the baseline design. More specifically, the CPI ratio of the baseline to the alternative design, as shown in the table above, is at least one. 
 		  In some programs like mfilt and bsearch, the CPI was larger than one. 
