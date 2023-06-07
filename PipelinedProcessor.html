@@ -207,9 +207,9 @@ datapath units. I divided the design into two modules: the datapath,
 figure 3, and I implemented some changes in the datapath and the control unit to produce my final design.
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/pipelined2.png" id="rcimage1" 
-   	 style="max-width:70%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
  	 <img src="assets/images/pipelined3.png" id="rcimage2" 
-   	 style="max-width:70%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
 	</div>
 	<br>	To implement specific instructions like JAL and JALR, I made modifications to the Fetch stage, adding a multiplexer (pc_sel_mux_F) to accept multiple inputs. 
 		Other changes in the datapath included the addition of a multiplier (imul) in the Execute stage, a multiplexer (op1_sel_mux_D) in the Decode stage, two registers 
@@ -217,9 +217,9 @@ figure 3, and I implemented some changes in the datapath and the control unit to
 		Execute stage. The instructions the baseline design should implement are shown in figure 4. The new structures I implemented are highlighted in figure 5. 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/pipelined4.png" id="rcimage1" 
-   	 style="max-width:70%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
  	 <img src="assets/images/pipelined5.png" id="rcimage2" 
-   	 style="max-width:70%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
 	</div>
 	<br>	The baseline design provided a comprehensive implementation of the TinyRV2 ISA for comparison purposes. However, there was still room for improvement. 
 		Splitting the control and datapath modules facilitated readability and debugging, allowing me to identify errors quickly. The design incorporated a system of 
