@@ -241,8 +241,8 @@ figure 3, and I implemented some changes in the datapath and the control unit to
 	
 	<br>	To evaluate the performance of the designs, I executed five different programs: vvadd-unopt, vvadd-opt, cmult, bsearch, and mfilt. In most programs, 
 		the alternative design demonstrated a reduction in the number of cycles executed compared to the baseline design. The best-case scenario showed a 
-		reduction of 2695 cycles for the alternative design (for the mfilt program), while the worst-case scenario required the same number of cycles as the 
-		baseline design (589 cycles for the vvadd-opt program). However, on average, the CPI ratio of the baseline to the alternative design was at least one, 
+		reduction of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2695</span> cycles for the alternative design (for the mfilt program), while the worst-case scenario required the same number of cycles as the 
+		baseline design (<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">589</span> cycles for the vvadd-opt program). However, on average, the CPI ratio of the baseline to the alternative design was at least one, 
 		indicating that the alternative design is more efficient and saves multiple cycles for most programs. The CPI ratio was larger than one for programs 
 		like mfilt and bsearch.
 		
@@ -250,8 +250,8 @@ figure 3, and I implemented some changes in the datapath and the control unit to
 <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing Strategy</strong></font></h3></div>
 		At my implementation, I followed a systematic testing strategy to ensure the correctness and performance of my designs. 
 		The testing process involved multiple stages and different types of tests. Here is an overview of my testing strategy:
-		&bull;Component-Level Testing: I began by testing each individual component of the design in isolation to ensure they function correctly. This involved 
-		verifying the performance of components such as the ALU (Arithmetic Logic Unit) and the immediate value generator. I implemented a set of 14 unit tests 
+	<br>	&bull;Component-Level Testing: I began by testing each individual component of the design in isolation to ensure they function correctly. This involved 
+		verifying the performance of components such as the ALU (Arithmetic Logic Unit) and the immediate value generator. I implemented a set of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">14</span> unit tests 
 		specifically designed for these components. For the immediate value generator, I covered various immediate types and tested both positive and negative values 
 		to ensure correct extension. Similarly, for the ALU, I implemented at least five different tests for each operation, checking different positive and negative 
 		values to validate proper handling of signed and unsigned values.
@@ -273,7 +273,7 @@ figure 3, and I implemented some changes in the datapath and the control unit to
 		In my evaluation, I compared the performance of both the baseline design and the alternative design by executing five benchmark programs. 
 		Here are the key findings:
 	<br>	&bull;vvadd-unopt: This program, an unoptimized version of vector-vector addition, exhibited significant performance improvement with the alternative design 
-		compared to the baseline. The baseline design had a CPI (Cycles Per Instruction) of 2.22, while the alternative design reduced it to 1.34 by utilizing bypassing 
+		compared to the baseline. The baseline design had a CPI (Cycles Per Instruction) of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2.22</span>, while the alternative design reduced it to  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.34</span> by utilizing bypassing 
 		for load-use dependencies.
 	<br>	&bull;vvadd-opt: In this optimized version of vector-vector addition, where multiple values are loaded simultaneously and added with minimal stalls, there was no 
 		noticeable difference in performance between the baseline and alternative designs. This demonstrates how assembly code optimized for specific microarchitectures 
@@ -302,7 +302,7 @@ figure 3, and I implemented some changes in the datapath and the control unit to
 		
 	<br>	Considering the performance advantages, the comparable area and power requirements, and the minimal downsides, the alternative design was deemed a better choice 
 		in general. The improved CPI and the expected net decrease in execution time for most applications made the alternative design preferable over the baseline. The 
-		baseline design would only outperform the alternative design if the two added multiplexers slowed down the critical path by a factor of 1.61, which was unlikely. 
+		baseline design would only outperform the alternative design if the two added multiplexers slowed down the critical path by a factor of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.61</span>, which was unlikely. 
 		Therefore, the alternative design provided superior performance and justified the slight increase in area and energy usage.
 		
 
