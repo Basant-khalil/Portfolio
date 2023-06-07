@@ -189,7 +189,8 @@
 		  the baseline and alternative designs. 
 		  The evaluation results demonstrated that the alternative design outperformed the baseline design in terms of CPI (cycles per instruction) for 
 		  multithreaded programs. 
-            For instance, the multithreaded design exhibited a CPI of 1.85 for the multithreaded vvadd test, while the single-core design had a CPI of 5.45 for 
+            For instance, the multithreaded design exhibited a CPI of <span style="color: gold; font-weight: bold; font-style: italic;">1.85</span> for the 
+		  multithreaded vvadd test, while the single-core design had a CPI of <span style="color: gold; font-weight: bold; font-style: italic;">5.45</span> for 
 		  the same test. Similar improvements were observed in other evaluation tests, indicating that the alternative design effectively exploited thread-level 
 		  parallelism to enhance throughput and reduce CPI.
        	<center>
@@ -266,7 +267,7 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 		previous project. One or two instructions were chosen from each category, such as add and mul from rr, addi from rimm, bne from branch, jal from 
 		jump, lw and sw from memory, and csrr and csrw from csr type of instructions.
 		<br> For the multicore design, individual design blocks like CacheNet, MemNet, and McoreDataCache were also tested. CacheNet was tested by 
-		connecting test sources and test sinks to the upstream network and a 4-port test memory, shown in Figure 3 above, to the downstream network. 
+		connecting test sources and test sinks to the upstream network and a <span style="color: gold; font-weight: bold; font-style: italic;">4</span> -port test memory, shown in Figure 3 above, to the downstream network. 
 		Similarly, MemNet was tested by connecting test sources and test sinks to the upstream network and a single-port test memory to the downstream 
 		network. 
 		The McoreDataCache, which combines CacheNet, MemNet, and four cache banks, was unit tested by connecting test sources and test sinks to the 
@@ -279,9 +280,10 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 		syntax, which acted as source/sink messages for each core based on its ID.
 		<br> To compare single and multi-threaded benchmarks, several algorithms, including binary search, complex number multiplication, 
 		applying a masked filter to an image, addition of two vectors, and quicksort, were provided. All of these algorithms were first 
-		verified for functionality on native x64 systems, compiled for the TinyRV2 processor, and then ISA simulated using Functional Level 
-		Verification. The object file was also targeted to the single and multicore systems created using simulators score-sim and mcore-sim. 
-		The testing strategy followed an incremental approach, starting with basic tests, then directed tests, and finally random tests intended for 
+		verified for functionality on native <span style="color: gold; font-weight: bold; font-style: italic;">x64</span> systems, 
+		compiled for the <span style="color: gold; font-weight: bold; font-style: italic;">TinyRV2</span> processor, and then ISA simulated using 
+		Functional Level Verification. The object file was also targeted to the single and multicore systems created using simulators score-sim and mcore-sim. 
+	<br>	The testing strategy followed an incremental approach, starting with basic tests, then directed tests, and finally random tests intended for 
 		the test subsystem. Basic tests checked the system's functionality, directed tests stressed corner cases and negative scenarios, while random 
 		tests were variations of basic and directed tests with random inputs. Different delays were added to the test source for thorough verification.
 <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
@@ -292,7 +294,7 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 		quicksort on a quarter of the dataset and then merging the sorted portions together. The required number of cycles, CPI (Cycles Per Instruction), 
 		and the number of committed instructions for each benchmark were recorded and analyzed.
 		<br> In both figures below, it can be observed that while the multicore implementation improved the number of cycles required for the benchmark 
-		cases, the improvement did not match the naive expectation of a 4x speed increase over the single-core implementation. 
+		cases, the improvement did not match the naive expectation of a <span style="color: gold; font-weight: bold; font-style: italic;">4x</span> speed increase over the single-core implementation. 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/roster_fig8.png" id="rcimage1" 
    	 style="max-width:50%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
@@ -301,9 +303,12 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 	</div>
 		<br>Data dependencies between the different cores could lead to stalls in one or more cores, reducing the overall speedup. Additionally, there is 
 		overhead involved in distributing the work between each core, as seen by the number of cycles for the single-threaded benchmarks on the single and 
-		multicore processors in Table 1. The overhead can range from 2.5% additional cycles for binary search to nearly 20% more cycles for complex 
+		multicore processors in Table 1. The overhead can range from <span style="color: gold; font-weight: bold; font-style: italic;">2.5%</span> additional cycles 
+		for binary search to nearly 
+		<span style="color: gold; font-weight: bold; font-style: italic;">20%</span> more cycles for complex 
 		multiplication.
-		<br>For the multi-threaded benchmarks, there was a 1.8 to 2.75x improvement over the single-core implementation. The largest speedup was observed 
+		<br>For the multi-threaded benchmarks, there was a <span style="color: gold; font-weight: bold; font-style: italic;">1.8</span> to 
+		<span style="color: gold; font-weight: bold; font-style: italic;">2.75x</span> improvement over the single-core implementation. The largest speedup was observed 
 		in cases where operations were independent, such as binary search, complex multiplication, and applying a filter. The benefit of the multicore 
 		processor was smaller for adding two vectors together, as the number of operations was small enough that the overhead of creating new threads 
 		started to play a significant role. The smallest improvement was seen in the sorting benchmark due to the additional operations required to merge 
