@@ -170,53 +170,130 @@
         </header>
         <section class="about-text">
           <p>
-		  The main goal of this project was to delve into various topics, including software/hardware co-design, programming single- and multithreaded C programs, 
-		  and evaluating computer architecture based on architecture-level implementations. 
-		  In this project, I tackled significant themes in computer architecture, including memory networks and incremental design. 
-		  Furthermore, I explored software-hardware co-design to gain a deep understanding of implementing software applications, hardware/software interfaces, 
-		  and hardware microarchitecture.
-		  <br>  Multicore processors enable simultaneous handling of multiple threads, resulting in better performance for systems running multiple applications 
-		  concurrently. By allocating different threads to separate cores, multicore processors exploit thread-level parallelism. 
-		  Although not all applications can be fully parallelized, the performance benefits of multicore processors outweigh the associated costs, including 
-		  hardware, area, and energy requirements. Despite the higher energy consumption of multicore processors due to running multiple threads and supporting 
-		  additional hardware, the energy usage per thread is lower compared to a single-core processor.
-		  Increasing the number of cores significantly improves system performance for concurrent multithreaded applications.
+		  In this project, I conducted a comparison between two pipelined processor implementations: one utilizing stalling to handle data hazards, and the other 
+		  incorporating both stalling and bypassing. Pipelining involves dividing the datapath and control modules into multiple stages using buffer registers, 
+		  which leads to potential speed improvements proportional to the number of pipelined stages. This technique enables the execution of multiple transactions 
+		  simultaneously, resulting in faster cycle times compared to single-stage processors.
+	<br>	  For this project, I designed two 5-stage pipelined processors that support the TinyRV2 ISA. The baseline design employed stalling to resolve data hazards, 
+		  while the alternative design utilized bypassing to enhance processor performance. Bypassing, achieved through special bypass paths from the Execute stage (X),
+		  Memory stage (M), and Write-Back stage (W) to the Decode stage (D), allows for more efficient resolution of data dependencies, eliminating the need for 
+		  stalling in many cases. Load (lw) and store (sw) instructions are exceptions to bypassing.
+	<br>	  I anticipated improved transaction throughput with the alternative bypassed design compared to the baseline design. I successfully implemented both designs,
+		  tested their functionality, and performed evaluations to compare their performance. The alternative design featured additional control signals, 
+		  datapath structures, such as two multiplexers, and modifications to the stall and squash signals to accommodate bypassing. The only differences in the 
+		  datapath between the alternative and baseline designs were the two four-input multiplexers. Although the alternative design included bypassing, it required 
+		  fewer stall signals than the baseline design, resulting in only a minor increase in cost.
+	<br>	  While the alternative design's cycle time might be slightly longer due to the added bypass paths potentially lengthening the critical path, the increase in 
+		  power consumption would not be significant. The alternative design included a slight increase in complexity due to the additional multiplexers and bypass logic. 
+		  When running five different programs, including vvadd-unopt, vvadd-opt, cmult, bsearch, and mfilt, the alternative design executed fewer cycles than the 
+		  baseline design in most cases. The alternative design demonstrated better efficiency, saving multiple cycles for programs and exhibiting lower CPI on average 
+		  compared to the baseline design.
+	<br>	  The alternative design proves to be a superior implementation of the pipelined processor, delivering improved performance with minimal downsides, 
+		  
+		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
+		  Moving on to the baseline design, it is a five-stage stalling processor supporting the TinyRV2 ISA. I divided the design into two modules: the datapath, 
+		responsible for processing input data based on control signals, and the control module, managing data movement through the datapath. The five stages of the 
+		pipelined processor are Fetch (F), Decode (D), Execute (X), Memory (M), and Writeback (W).
+		
+	<br>	To implement specific instructions like JAL and JALR, I made modifications to the Fetch stage, adding a multiplexer (pc_sel_mux_F) to accept multiple inputs. 
+		Other changes in the datapath included the addition of a multiplier (imul) in the Execute stage, a multiplexer (op1_sel_mux_D) in the Decode stage, two registers 
+		(op1_reg_X and op2_reg_X) between the Decode and Execute stages, a +4 structure (pc_incr_X) in the Execute stage, and a multiplexer (ex_result_sel_mux_X) in the 
+		Execute stage.
+		
+	<br>	The baseline design provided a comprehensive implementation of the TinyRV2 ISA for comparison purposes. However, there was still room for improvement. 
+		Splitting the control and datapath modules facilitated readability and debugging, allowing me to identify errors quickly. The design incorporated a system of 
+		valid/ready response and answer signals, ensuring consistent operation despite variations in fetching instructions and data from memory. This system also 
+		accommodated multi-cycle to select the appropriate bypassed value. In the alternative design, I added additional control signals to support full bypassing, 
+		ensuring that the bypass paths are activated only when necessary.
+	      <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
+		The alternative design incorporates minimal changes to the datapath compared to the baseline design. The only notable differences are the addition of two 
+		four-input multiplexers in the Decode stage. These multiplexers receive the bypassed values from the X, M, and W stages, along with the value read from the 
+		register file. These multiplexers enable the selection of the correct input value based on the bypassing paths.
+		
+	<br>	Despite the inclusion of bypassing, the alternative design requires fewer stall signals compared to the baseline design. This means that only a few additional 
+		transistors are needed to support bypassing, making the cost increase of the alternative design negligible. Although the bypass paths may add more time to the 
+		critical path, resulting in a slightly longer cycle time compared to the baseline design, the power increase is not significant. The additional power usage is 
+		offset by the slower cycle time, resulting in similar power usage for both designs.
+	
+	<br>	To evaluate the performance of the designs, I executed five different programs: vvadd-unopt, vvadd-opt, cmult, bsearch, and mfilt. In most programs, 
+		the alternative design demonstrated a reduction in the number of cycles executed compared to the baseline design. The best-case scenario showed a 
+		reduction of 2695 cycles for the alternative design (for the mfilt program), while the worst-case scenario required the same number of cycles as the 
+		baseline design (589 cycles for the vvadd-opt program). However, on average, the CPI ratio of the baseline to the alternative design was at least one, 
+		indicating that the alternative design is more efficient and saves multiple cycles for most programs. The CPI ratio was larger than one for programs 
+		like mfilt and bsearch.
+		
+	
+<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing Strategy</strong></font></h3></div>
+		At my implementation, I followed a systematic testing strategy to ensure the correctness and performance of my designs. 
+		The testing process involved multiple stages and different types of tests. Here is an overview of my testing strategy:
+		&bull;Component-Level Testing: I began by testing each individual component of the design in isolation to ensure they function correctly. This involved 
+		verifying the performance of components such as the ALU (Arithmetic Logic Unit) and the immediate value generator. I implemented a set of 14 unit tests 
+		specifically designed for these components. For the immediate value generator, I covered various immediate types and tested both positive and negative values 
+		to ensure correct extension. Similarly, for the ALU, I implemented at least five different tests for each operation, checking different positive and negative 
+		values to validate proper handling of signed and unsigned values.
+	<br>    &bull;Integration Testing: Once the individual components were tested, I proceeded to test the larger operations performed by my CPU. In total, I 
+		implemented 268 test functions to cover different cases and scenarios. I started by running each operation in isolation whenever possible to verify 
+		the functionality of the control system and datapath beyond the ALU. This step ensured that everything outside the ALU, including dependencies and 
+		register handling, worked as expected. I also introduced dependencies between input and output registers of different functions to test the stalling 
+		and bypassing mechanisms. I used a variety of input-output register patterns, including cases with identical registers within a single instruction. 
+		Furthermore, I introduced different numbers of NOPs between instructions to validate correct behavior across different stages. I paid special 
+		attention to potential corner cases, such as consecutive multiply instructions, which could affect data loading and output from the multiply unit.
+	<br>	&bull;Control Operation Testing: Testing control operations like branches and jumps required a slightly different approach. To ensure correctness, I 
+		used addi instructions to track the control flow, setting specific bits depending on the program path. This method allowed me to check the behavior 
+		of these operations accurately. I implemented various dependencies and verified that only the intended instructions were executed.
+	<br>	&bull;Random Testing: Random testing played a crucial role in validating the arithmetic operations. Although it was challenging to devise meaningful random 
+		tests for certain instructions, I extensively used random input values to verify the output against the expected result. Additionally, I introduced delays in o
+		ur tests to assess the CPU's robustness against potential issues in the inputs.
+	
+<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
+		In my evaluation, I compared the performance of both the baseline design and the alternative design by executing five benchmark programs. 
+		Here are the key findings:
+	<br>	&bull;vvadd-unopt: This program, an unoptimized version of vector-vector addition, exhibited significant performance improvement with the alternative design 
+		compared to the baseline. The baseline design had a CPI (Cycles Per Instruction) of 2.22, while the alternative design reduced it to 1.34 by utilizing bypassing 
+		for load-use dependencies.
+	<br>	&bull;vvadd-opt: In this optimized version of vector-vector addition, where multiple values are loaded simultaneously and added with minimal stalls, there was no 
+		noticeable difference in performance between the baseline and alternative designs. This demonstrates how assembly code optimized for specific microarchitectures 
+		within a given ISA can substantially improve performance but may not be applicable in general cases.
+	<br>	&bull;cmult: The alternative design showed modest performance improvements in the "cmult" program, where two arrays of complex numbers are multiplied elementwise. 
+		The potential pipeline stalls caused by the multiplication instructions limited the performance gain from bypassing.
+	<br>	&bull;bsearch: The "bsearch" program, which performs a binary search on an array, showed a substantial performance improvement with the alternative design over the baseline. 
+		The alternative design reduced the required number of cycles by a factor of two compared to the baseline. The bypassing mechanism significantly accelerated the 
+		operations that relied on previous instructions' outcomes.
+	<br>	&bull;mfilt: The "mfilt" baseline program, which applies a filter to a two-dimensional array, also demonstrated a notable reliance on bypassing for improved performance. 
+		The alternative design's bypassing capabilities sped up the operations that heavily depended on previous results.
+		
+	<br>	In terms of implementation considerations, both designs were expected to have a similar area requirement, with the only notable difference 
+		being the addition of two four-input multiplexers in the alternative design. The control logic for the alternative design was slightly more complex 
+		but required fewer stall signals. Thus, the overall difference in required transistors between the two designs was expected to be minimal.
+		
+	<br>	Regarding cycle time, the alternative design was projected to have a slightly longer cycle time due to the bypass paths. However, the impact on 
+		the cycle time would depend on the critical path components. If components such as reading from the register file were already slow in the baseline 
+		design, the bypass paths might not add significant additional time. Nonetheless, operations like reading from memory were expected to be among the 
+		slowest, and in such cases, the cycle time increase in the alternative design would likely be manageable compared to the benefits of bypassing. The 
+		same analysis applied if the critical path in the baseline design involved the ALU.
+		
+	<br>	Although the alternative design's bypassing mechanism introduced additional logic and potentially increased energy consumption per cycle, the overall
+		difference in power usage was not expected to be substantial. The increased power usage per cycle would be partially offset by the slower cycle time in the 
+		alternative design.
+		
+	<br>	Considering the performance advantages, the comparable area and power requirements, and the minimal downsides, the alternative design was deemed a better choice 
+		in general. The improved CPI and the expected net decrease in execution time for most applications made the alternative design preferable over the baseline. The 
+		baseline design would only outperform the alternative design if the two added multiplexers slowed down the critical path by a factor of 1.61, which was unlikely. 
+		Therefore, the alternative design provided superior performance and justified the slight increase in area and energy usage.
+		
            <br>  <br> The project involved two designs: a <font color="gold"><strong>baseline design</strong></font> featuring a single-core processor with instruction and
 		  data caches, and an <font color="gold"><strong>alternative design</strong></font> consisting of a multicore processor with private instruction caches 
 		  and a shared, banked data cache.
        
-		  <br> I conducted evaluations by developing both single-threaded and multithreaded sorting microbenchmarks in C and analyzed the compiled binary on both 
-		  the baseline and alternative designs. 
-		  The evaluation results demonstrated that the alternative design outperformed the baseline design in terms of CPI (cycles per instruction) for 
-		  multithreaded programs. 
-            For instance, the multithreaded design exhibited a CPI of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.85</span> for the 
-		  multithreaded vvadd test, while the single-core design had a CPI of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">5.45</span> for 
-		  the same test. Similar improvements were observed in other evaluation tests, indicating that the alternative design effectively exploited thread-level 
-		  parallelism to enhance throughput and reduce CPI.
+
+         
        	<center>
 		<img src="assets/images/roster_fig1.png" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>     
 		  
-	<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
-The baseline design depicted above in Figure 1 represents a single-core, pipelined processor with full bypassing. It consists of an instruction cache and an 
-		unbanked data cache. The absence of networks in this design simplifies the flow of memory data through a single processor. 
-The baseline design leverages the alternative design from a previous project to reduce stalling by implementing bypassing. Bypassing plays a crucial role in 
-		enhancing processor throughput with minimal additional hardware, area, and power costs. 
-Additionally, the instruction and data caches in the baseline design, adapted from the alternative design in a different project, utilize temporal locality 
-		and are two-way associative, respectively.
-<br>
-In terms of software, I implemented a scalar quicksort algorithm to sort an array of integers in the baseline design. Quicksort selects a pivot element and 
-		rearranges the array such that elements on the right are greater than the pivot, and elements on the left are smaller. 
-The algorithm recursively applies quicksort to the divided portions until the entire array is sorted. Selecting the median value as the pivot ensures expected 
 		<font color="gold"><strong>O(n log n)</strong></font> performance for the quicksort function. 
-		This algorithm was chosen as a suitable baseline due to its spatial locality and efficient sorting capabilities compared to other algorithms like 
-		merge sort.
-	<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
-		
-The alternative design, showcased in figure 7 below (and at a high level in figure 2 below), represents a quad-core processor with four instruction caches and a 
-		banked data cache system. Networks play a vital role in managing the interface between caches, main memory, and processors. The multicore data cache 
-		includes four data cache banks, a cachenet, and a memnet. 
+ 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/roster_fig7.png" id="rcimage1" 
    	 style="max-width:70%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
@@ -229,99 +306,7 @@ The alternative design, showcased in figure 7 below (and at a high level in figu
 		<img src="assets/images/roster_fig3.png" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>     
-<br> This network has an upstream (the processor) and the downstream (main memory) message adapter that converts processor and main memory messages to network messages. 
-	The upstream adapter extracts the bank bits in Figure 4 shown below from the
-processor and includes them in the destination header. The Memnet in Figure 5 works similarly as the cachenet, but the upstream
-adapter inserts a zero always in the destination field.
-	<div class="column" style="display: flex; align-items: center;">
-  	<img src="assets/images/roster_fig4.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
- 	 <img src="assets/images/roster_fig5.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
-	</div>
-<br>  The memnet refills the instruction caches and data cache banks. Finally, the MCoreDataCache module in figure 6 connects the cachenet, the MemNet, and the four 
-	cache banks to create the complete four bank
-data cache system
-	<center>
-	<img src="assets/images/roster_fig6.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>  
-<br>The alternative design incorporates the processor design from a previous project, which includes bypassing and stalling to handle RAW data hazards more 
-		efficiently. 
-Moreover, the alternative design utilizes a two-way set associative cache for the instruction caches, offering a higher hit rate compared to the direct-mapped 
-		cache in the baseline design.
-<br> To provide a more realistic processor and cache design, I instantiated the MCoreDataCache module along with four processors, four instruction caches, and 
-		MemNet for the instruction caches in the multicore system. The incremental approach I followed in this design demonstrates the principles of 
-		modularity and hierarchy, as the components are organized into modules that interact to form the final MultiCore system.
-<br> For the sorting algorithm in the alternative design, I implemented a mergesort algorithm. Mergesort combines two sorted arrays into one larger sorted array. 
-		The algorithm divides the array into two halves, recursively applies quicksort on each half, and then merges the sorted halves. This 
-		implementation of mergesort complements the alternative design, as it allows us to compare the advantages and disadvantages of dividing the 
-		array among multiple cores.
-<br> While multicore processors offer the advantage of running multiple threads concurrently, it is essential to consider the trade-offs when adding more cores. 
-		Simply increasing the number of cores without proper consideration can lead to higher overhead in dividing the work to be done in parallel. It is 
-		crucial to strike a balance and avoid excessive core counts. Nevertheless, the alternative design, with its exploitation of thread-level 
-		parallelism, delivers superior performance compared to the single-core baseline design.
 
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing Strategy</strong></font></h3></div>
-	The single-core system, consisting of one processor along with instruction and data caches, was tested with a selection of assembly tests created during 
-		previous project. One or two instructions were chosen from each category, such as add and mul from rr, addi from rimm, bne from branch, jal from 
-		jump, lw and sw from memory, and csrr and csrw from csr type of instructions.
-		<br> For the multicore design, individual design blocks like CacheNet, MemNet, and McoreDataCache were also tested. CacheNet was tested by 
-		connecting test sources and test sinks to the upstream network and a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">4</span> -port test memory, 
-		shown in Figure 3 above, to the downstream network. 
-		Similarly, MemNet was tested by connecting test sources and test sinks to the upstream network and a single-port test memory to the downstream 
-		network. 
-		The McoreDataCache, which combines CacheNet, MemNet, and four cache banks, was unit tested by connecting test sources and test sinks to the 
-		CacheNet and a single-port test memory to the MemNet.
-		<br> The test sets used for CacheNet and McoreDataCache were implemented as well. To accommodate four sources and four sinks, the 
-		TestNetCacheSink was used to allow out-of-order delivery and ignore the cache test bits. The MemNet tests reused the messages of TestMemory.
-		<br> To fully test the multicore system, the same instructions as in the single-core system were used, with the exception of sw and csr 
-		instructions. Some tests of the sw instruction might lead to data races when multiple cores try to access the same address, potentially 
-		resulting in a core reading data that has already been overwritten. To test csr in the multicore system, a list of values was passed in the 
-		syntax, which acted as source/sink messages for each core based on its ID.
-		<br> To compare single and multi-threaded benchmarks, several algorithms, including binary search, complex number multiplication, 
-		applying a masked filter to an image, addition of two vectors, and quicksort, were provided. All of these algorithms were first 
-		verified for functionality on native <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">x64</span> systems, 
-		compiled for the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">TinyRV2</span> processor, and then ISA simulated using 
-		Functional Level Verification. The object file was also targeted to the single and multicore systems created using simulators score-sim and mcore-sim. 
-	<br>	The testing strategy followed an incremental approach, starting with basic tests, then directed tests, and finally random tests intended for 
-		the test subsystem. Basic tests checked the system's functionality, directed tests stressed corner cases and negative scenarios, while random 
-		tests were variations of basic and directed tests with random inputs. Different delays were added to the test source for thorough verification.
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
-	The performance of different processors was analyzed using a variety of benchmark algorithms, including binary search, complex number multiplication, 
-		applying a masked filter to an image, sorting a list, and performing addition between two vectors. Both single-threaded and multi-threaded 
-		versions of each benchmark were used.
-		<br> The single-threaded sort algorithm was implemented as a quicksort. The multi-threaded sort involved each of the four cores performing 
-		quicksort on a quarter of the dataset and then merging the sorted portions together. The required number of cycles, CPI (Cycles Per Instruction), 
-		and the number of committed instructions for each benchmark were recorded and analyzed.
-		<br> In both figures below, it can be observed that while the multicore implementation improved the number of cycles required for the benchmark 
-		cases, the improvement did not match the naive expectation of a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">4x</span> speed increase over the single-core implementation. 
-	<div class="column" style="display: flex; align-items: center;">
-  	<img src="assets/images/roster_fig8.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
- 	 <img src="assets/images/table1.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
-	</div>
-		<br>Data dependencies between the different cores could lead to stalls in one or more cores, reducing the overall speedup. Additionally, there is 
-		overhead involved in distributing the work between each core, as seen by the number of cycles for the single-threaded benchmarks on the single and 
-		multicore processors in Table 1. The overhead can range from <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2.5%</span> additional cycles 
-		for binary search to nearly <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">20%</span> more cycles for complex 
-		multiplication.
-		<br>For the multi-threaded benchmarks, there was a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.8</span> to 
-		<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2.75x</span> improvement over the single-core implementation. The largest speedup was observed 
-		in cases where operations were independent, such as binary search, complex multiplication, and applying a filter. The benefit of the multicore 
-		processor was smaller for adding two vectors together, as the number of operations was small enough that the overhead of creating new threads 
-		started to play a significant role. The smallest improvement was seen in the sorting benchmark due to the additional operations required to merge 
-		the sorted data.
-		<br>The complexity of the program and the level of data dependency determine the performance of the multicore implementation. For shorter programs,
-		the additional overhead of assigning operations to each core can reduce the performance benefit and even negate it for very short programs. 
-		However, in general, the multicore processor is expected to perform better for longer programs with a higher degree of concurrency. It can 
-		allocate different threads to different cores, enabling concurrent execution and increased throughput.
-		<br>It's important to note that the multicore processor is more complex than the single-core design, requiring more transistors. It includes 
-		three additional cores, six additional caches, and a network management system. As a result, a multicore system will be more expensive and 
-		require more chip space and energy to power the additional cores and the network. The clock frequency of both systems will likely be comparable, 
-		as the valid/ready interface between the cores, caches, and network removes these additional structures from the critical path. However, the 
-		multicore system's clock might be slightly slower due to the increased distance between components.
 		</p>
         
         </section>
