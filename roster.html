@@ -187,7 +187,7 @@
 	</center>     
 		  
 	<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
-The baseline design depicted above represents a single-core, pipelined processor with full bypassing. It consists of an instruction cache and an unbanked data cache. The absence of networks in this design simplifies the flow of memory data through a single processor. 
+The baseline design depicted above in Figure 1 represents a single-core, pipelined processor with full bypassing. It consists of an instruction cache and an unbanked data cache. The absence of networks in this design simplifies the flow of memory data through a single processor. 
 The baseline design leverages the alternative design from a previous project to reduce stalling by implementing bypassing. Bypassing plays a crucial role in enhancing processor throughput with minimal additional hardware, area, and power costs. 
 Additionally, the instruction and data caches in the baseline design, adapted from the alternative design in a different project, utilize temporal locality and are two-way associative, respectively.
 <br>
@@ -196,14 +196,20 @@ The algorithm recursively applies quicksort to the divided portions until the en
 		This algorithm was chosen as a suitable baseline due to its spatial locality and efficient sorting capabilities compared to other algorithms like merge sort.
 	<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
 		
-The alternative design, showcased in the first figure below (and at a high level in the second figure), represents a quad-core processor with four instruction caches and a banked data cache system. Networks play a vital role in managing the interface between caches, main memory, and processors. The multicore data cache includes four data cache banks, a cachenet, and a memnet. 
+The alternative design, showcased in figure 7 below (and at a high level in figure 2 below), represents a quad-core processor with four instruction caches and a banked data cache system. Networks play a vital role in managing the interface between caches, main memory, and processors. The multicore data cache includes four data cache banks, a cachenet, and a memnet. 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/roster_fig7.png" id="rcimage1" 
    	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
  	 <img src="assets/images/roster_fig2.png" id="rcimage2" 
    	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
 	</div>
-<br> The cachenet handles the connectivity between the processors and the data cache banks, while the memnet is responsible for refilling the instruction caches and data cache banks. The alternative design incorporates the processor design from a previous project, which includes bypassing and stalling to handle RAW data hazards more efficiently. 
+<br> The cachenet shown in Figure 3 below handles the connectivity between the processors and the data cache banks, while the memnet is responsible for refilling the instruction caches and data cache banks. 
+	<center>
+		<img src="assets/images/roster_fig3.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>     
+		  
+<br>The alternative design incorporates the processor design from a previous project, which includes bypassing and stalling to handle RAW data hazards more efficiently. 
 Moreover, the alternative design utilizes a two-way set associative cache for the instruction caches, offering a higher hit rate compared to the direct-mapped cache in the baseline design.
 <br> To provide a more realistic processor and cache design, I instantiated the MCoreDataCache module along with four processors, four instruction caches, and MemNet for the instruction caches in the multicore system. The incremental approach I followed in this design demonstrates the principles of modularity and hierarchy, as the components are organized into modules that interact to form the final MultiCore system.
 <br> For the sorting algorithm in the alternative design, I implemented a mergesort algorithm. Mergesort combines two sorted arrays into one larger sorted array. The algorithm divides the array into two halves, recursively applies quicksort on each half, and then merges the sorted halves. This implementation of mergesort complements the alternative design, as it allows us to compare the advantages and disadvantages of dividing the array among multiple cores.
