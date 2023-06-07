@@ -208,7 +208,21 @@ The alternative design, showcased in figure 7 below (and at a high level in figu
 		<img src="assets/images/roster_fig3.png" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>     
-		  
+<br> This network has an upstream (the processor) and the downstream (main memory) message adapter that converts processor and main memory messages to network messages. The upstream adapter extracts the bank bits in Figure 4 shown below from the
+processor and includes them in the destination header. The Memnet in Figure 5 works similarly as the cachenet, but the upstream
+adapter inserts a zero always in the destination field.
+	<div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/roster_fig4.png" id="rcimage1" 
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/roster_fig5.png" id="rcimage2" 
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
+<br>  The memnet refills the instruction caches and data cache banks. Finally, the MCoreDataCache module in figure 6 connects the cachenet, the MemNet, and the four cache banks to create the complete four bank
+data cache system
+	<center>
+	<img src="assets/images/roster_fig6.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>  
 <br>The alternative design incorporates the processor design from a previous project, which includes bypassing and stalling to handle RAW data hazards more efficiently. 
 Moreover, the alternative design utilizes a two-way set associative cache for the instruction caches, offering a higher hit rate compared to the direct-mapped cache in the baseline design.
 <br> To provide a more realistic processor and cache design, I instantiated the MCoreDataCache module along with four processors, four instruction caches, and MemNet for the instruction caches in the multicore system. The incremental approach I followed in this design demonstrates the principles of modularity and hierarchy, as the components are organized into modules that interact to form the final MultiCore system.
