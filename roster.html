@@ -242,9 +242,9 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 		<br> In both figures below, it can be observed that while the multicore implementation improved the number of cycles required for the benchmark cases, the improvement did not match the naive expectation of a 4x speed increase over the single-core implementation. 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/roster_fig8.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
  	 <img src="assets/images/table1.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 350px; object-fit: contain;">
 	</div>
 		<br>Data dependencies between the different cores could lead to stalls in one or more cores, reducing the overall speedup. Additionally, there is overhead involved in distributing the work between each core, as seen by the number of cycles for the single-threaded benchmarks on the single and multicore processors in Table 1. The overhead can range from 2.5% additional cycles for binary search to nearly 20% more cycles for complex multiplication.
 		<br>For the multi-threaded benchmarks, there was a 1.8 to 2.75x improvement over the single-core implementation. The largest speedup was observed in cases where operations were independent, such as binary search, complex multiplication, and applying a filter. The benefit of the multicore processor was smaller for adding two vectors together, as the number of operations was small enough that the overhead of creating new threads started to play a significant role. The smallest improvement was seen in the sorting benchmark due to the additional operations required to merge the sorted data.
