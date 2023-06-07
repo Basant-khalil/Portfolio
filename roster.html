@@ -204,9 +204,9 @@ Moreover, the alternative design utilizes a two-way set associative cache for th
 <br> While multicore processors offer the advantage of running multiple threads concurrently, it is essential to consider the trade-offs when adding more cores. Simply increasing the number of cores without proper consideration can lead to higher overhead in dividing the work to be done in parallel. It is crucial to strike a balance and avoid excessive core counts. Nevertheless, the alternative design, with its exploitation of thread-level parallelism, delivers superior performance compared to the single-core baseline design.
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/roster_fig7.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
  	 <img src="assets/images/roster_fig2.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
 	</div>
 <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing Strategy</strong></font></h3></div>
 	The single-core system, consisting of one processor along with instruction and data caches, was tested with a selection of assembly tests created during previous project. One or two instructions were chosen from each category, such as add and mul from rr, addi from rimm, bne from branch, jal from jump, lw and sw from memory, and csrr and csrw from csr type of instructions.
