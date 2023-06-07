@@ -1,24 +1,296 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>New Page</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=500px, initial-scale=3.0">
+  <title>BasantKhalil</title>
 
-  <!-- Include CSS file -->
-  <link rel="stylesheet" href="style.css">
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
-  <!-- Include JavaScript file -->
-  <script src="script.js"></script>
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <h1>Welcome to my new page!</h1>
 
-  <p>Here's a video I'd like to share:</p>
+  <!--
+    - #MAIN
+  -->
 
-  <video src="https://drive.google.com/file/d/1DGoHsM1d6caObKGxdC0prhDwYGR6yIAU/view?usp=share_link" controls>
-    Your browser does not support the video tag.
-  </video>
+  <main>
 
-  <p>Thanks for visiting!</p>
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Basant Khalil" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Basant khalil">Basant Khalil</h1>
+          <p class="title">
+            <span style="color: #FFFC33;"><big>Software Engineer</big></span><span style="color: #33FFFC;">Electrical&amp;Computer Engineer</span></p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:bak94@cornell.edu" class="contact-link">bak94@cornell.edu</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+6147178842" class="contact-link">+1 (614) 717-8842</a>
+            </div>
+
+          </li>
+          
+           <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+
+              <a href="https://github.com/Basant-khalil" class="contact-link">https://github.com/Basant-khalil</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Columbus, Ohio, USA</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://github.com/Basant-khalil" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="www.linkedin.com/in/basant-khalil" class="social-link">
+              <ion-icon name="logo-linkedIn"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+<div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+	<li>
+          <button class="navbar-link active" data-nav-link onclick="window.location.href='https://basant-khalil.github.io/Portfolio/'">Back</button>
+        </li>
+
+        </ul>
+
+      </nav>
+
+
+      <!-------------------------------------------------------------------- Article Text -------------------------------------------------------------------->
+      <article class="about  active" data-page="roster">
+        <header>
+          <h2 class="h2 article-title">Single & Multi-Core Processors</h2>
+        </header>
+        <section class="about-text">
+          <p>
+            Here, I present the key highlights of a project focused on computer architecture and design. The main goal of this project was to delve into various topics, including software/hardware co-design, programming single- and multithreaded C programs, and evaluating computer architecture based on architecture-level implementations.
+            In this project, I tackled significant themes in computer architecture, including memory networks and incremental design. The chosen approach emphasized structural composition, where we incrementally built a complex system by integrating thoroughly unit-tested subsystems. Furthermore, I explored software-hardware co-design to gain a deep understanding of implementing software applications, hardware/software interfaces, and hardware microarchitecture.
+           <br> The project involved two designs: a baseline design featuring a single-core processor with instruction and data caches, and an alternative design consisting of a multicore processor with private instruction caches and a shared, banked data cache.
+         <br> I conducted evaluations by developing both single-threaded and multithreaded sorting microbenchmarks in C. I analyzed the compiled binary and executed the programs on both the baseline and alternative designs. The evaluation results showcased that the alternative design outperformed the baseline design in terms of CPI (cycles per instruction) for multithreaded programs. 
+            For instance, the multithreaded design exhibited a CPI of 1.85 for the multithreaded vvadd test, while the single-core design had a CPI of 5.45 for the same test. Similar improvements were observed in other evaluation tests, indicating that the alternative design effectively exploited thread-level parallelism to enhance throughput and reduce CPI.
+            
+        <br>  Multicore processors enable simultaneous handling of multiple threads, resulting in better performance for systems running multiple applications concurrently. By allocating different threads to separate cores, multicore processors exploit thread-level parallelism. Although not all applications can be fully parallelized, the performance benefits of multicore processors outweigh the associated costs, including hardware, area, and energy requirements. Despite the higher energy consumption of multicore processors due to running multiple threads and supporting additional hardware, the energy usage per thread is lower compared to a single-core processor. I
+            Increasing the number of cores significantly improves system performance for concurrent multithreaded applications.
+            Moving on to the design details, the baseline design depicted in Figure 1 represents a single-core, pipelined processor with full bypassing. It consists of an instruction cache and an unbanked data cache. The absence of networks in this design simplifies the flow of memory data through a single processor. The baseline design leverages the alternative design from a previous lab to reduce stalling by implementing bypassing. Bypassing plays a crucial role in enhancing processor throughput with minimal additional hardware, area, and power costs. Additionally, the instruction and data caches in the baseline design, adapted from the alternative design in a different lab, utilize temporal locality and are two-way associative, respectively.
+
+In terms of software, we implemented a scalar quicksort algorithm to sort an array of integers in the baseline design. Quicksort selects a pivot element and rearranges the array such that elements on the right are greater than the pivot, and elements on the left are smaller. The algorithm recursively applies quicksort to the divided portions until the entire array is sorted. Selecting the median value as the pivot ensures expected O(n log n) performance for the quicksort function. This algorithm was chosen as a suitable baseline due to its spatial locality and efficient sorting capabilities compared to other algorithms like merge sort.
+
+The alternative design, showcased in Figure 7 (and at a high level in Figure 2), represents a quad-core processor with four instruction caches and a banked data cache system. Networks play a vital role in managing the interface between caches, main memory, and processors. The multicore data cache includes four data cache banks, a cachen
+            
+
+Moving on to the design details, the baseline design depicted in Figure 1 represents a single-core, pipelined processor with full bypassing. It consists of an instruction cache and an unbanked data cache. The absence of networks in this design simplifies the flow of memory data through a single processor. The baseline design leverages the alternative design from a previous lab to reduce stalling by implementing bypassing. Bypassing plays a crucial role in enhancing processor throughput with minimal additional hardware, area, and power costs. Additionally, the instruction and data caches in the baseline design, adapted from the alternative design in a different lab, utilize temporal locality and are two-way associative, respectively.
+
+In terms of software, we implemented a scalar quicksort algorithm to sort an array of integers in the baseline design. Quicksort selects a pivot element and rearranges the array such that elements on the right are greater than the pivot, and elements on the left are smaller. The algorithm recursively applies quicksort to the divided portions until the entire array is sorted. Selecting the median value as the pivot ensures expected O(n log n) performance for the quicksort function. This algorithm was chosen as a suitable baseline due to its spatial locality and efficient sorting capabilities compared to other algorithms like merge sort.
+
+The alternative design, showcased in Figure 7 (and at a high level in Figure 2), represents a quad-core processor with four instruction caches and a banked data cache system. Networks play a vital role in managing the interface between caches, main memory, and processors. The multicore data cache includes four data cache banks, a cachen
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+           The project's vision is to create a user-friendly application that helps students navigate their college course selection process. My goal is to provide various tools and features that will make the experience more convenient and personalized for the student. 
+	   Some features of the project include:
+		  <br>
+	   &bull;I successfully parsed data from the Cornell class roster API, which allowed us to provide students with the most up-to-date information on available courses. 
+		  <br>
+	   &bull;I implemented a feature that allows students to sort classes based on their preferred time frames, making it easier for them to create a schedule that works for them. For instance, the student can ask the engine to output classes occuring at certain time frame such as the morning.
+		  <br>
+	   &bull;I added a GPA calculator to our application, which will help students monitor their academic progress throughout their college years. <br>
+	   &bull;I gave students the ability to go back and fix their input or quit the application at any time, ensuring that their experience with the application is as stress-free and flexible as possible. <br>
+          </p>
+         
+	<center>
+		<img src="assets/images/frst_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+            The engine first starts by welcoming the user to the database. Then, it informs the user of the available comamnds that he can input such as major 'some major' or quit command.
+          </p>
+          <p>
+            The engine has verifiability, meaning if you input an invalid command or even invalid major whether in the <em><strong>major</strong></em> or <em><strong>doublemajor</strong></em> command, it will promp you to enter the right one. 
+		  For example, if the user inputted <em><strong>major lk</strong></em> where <em><strong>lk</strong></em> is not a valid major, the engine will let the user know of such mistake and will ask if the user would like correct the error. 
+          </p>
+	<center>
+	     <img src="assets/images/scnd_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+          <p>
+            The engine will then asks the user to input the college as one major could exist in different colleges and would thus have different requirements based on that. 
+	    If the college inputted by the user is invalid, the engine would let the user know of such error and promt him to reenter the choice as shown below.
+          </p>
+	<center>
+	     <img src="assets/images/thrd_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+	  <p>
+            Once the user inputs the right major and college, the engine would go on the next stage and ask if there are any courses the user took so it can remove it from the roadmap for the major. 
+          </p>	  
+	<center>
+	     <img src="assets/images/frth_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+	 <p>
+          Then the updated roadmap of the major courses gets printed.
+         </p>
+      
+	<center>
+	     <img src="assets/images/fifth_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+	 <p>
+          The engine asks if there the user is interested to explore courses of certain subject happening at some timeframe and ifsuch it prints those courses.
+         </p>	
+	 <center>
+	     <img src="assets/images/sxth_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+	<p>
+          Finally, the engine asks if the user is interested to know more information about any course and if so it prints that information from the class roster.
+         </p>	
+	<center>
+	     <img src="assets/images/ninth_ocaml.png" id="rcimage" alt="Custom Kitchen Drawing" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>
+
+		<h1>Video Demo of Academic Navigator Project</h1>
+		<iframe src="https://drive.google.com/file/d/1rXBxbVq-02kbEFLhPjCYOY-qZU164JRh/preview" width="640" height="480" style="max-width:95%;border:3px solid #F1D16C;"></iframe>
+        </section>
+      </article>
+    </div>
+  </main>
+
+	
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>
