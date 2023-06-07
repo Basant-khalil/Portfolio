@@ -178,7 +178,7 @@
 		  Increasing the number of cores significantly improves system performance for concurrent multithreaded applications.
            <br>  <br> The project involved two designs: a <font color="gold"><strong>baseline design</strong></font> featuring a single-core processor with instruction and data caches, and an <font color="gold"><strong>alternative design</strong></font> consisting of a multicore processor with private instruction caches and a shared, banked data cache.
        
-		  <br> I conducted evaluations by developing both single-threaded and multithreaded sorting microbenchmarks in C and analyzed the compiled binary and executed the programs on both the baseline and alternative designs. 
+		  <br> I conducted evaluations by developing both single-threaded and multithreaded sorting microbenchmarks in C and analyzed the compiled binary on both the baseline and alternative designs. 
 		  The evaluation results demonstrated that the alternative design outperformed the baseline design in terms of CPI (cycles per instruction) for multithreaded programs. 
             For instance, the multithreaded design exhibited a CPI of 1.85 for the multithreaded vvadd test, while the single-core design had a CPI of 5.45 for the same test. Similar improvements were observed in other evaluation tests, indicating that the alternative design effectively exploited thread-level parallelism to enhance throughput and reduce CPI.
        	<center>
