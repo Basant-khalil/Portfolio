@@ -52,7 +52,6 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
-
 // custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
@@ -79,7 +78,9 @@ const filterItems = document.querySelectorAll("[data-filter-item]");
 const filterFunc = function (selectedValue) {
   for (let i = 0; i < filterItems.length; i++) {
     const categories = filterItems[i].dataset.category.split("/");
-    if (selectedValue === "all" || categories.includes(selectedValue)) {
+    const projectCategories = categories.map(category => category.toLowerCase().trim());
+
+    if (selectedValue === "all" || projectCategories.includes(selectedValue)) {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
@@ -101,8 +102,6 @@ for (let i = 0; i < filterBtn.length; i++) {
     lastClickedBtn = this;
   });
 }
-
-
 
 
 // contact form variables
