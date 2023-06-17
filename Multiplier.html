@@ -192,18 +192,35 @@
 		  
 		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
           <br> The baseline design performs the following task: given a 64-bit req_msg with operands and necessary signals for val/rdy interfaces, it outputs the lower 32 bits result of the multiplication operation to the user. 
-		The algorithm I followed for the multiplication operation is as follows: The function takes two operands, a and b. If the least significant bit of b is 1, I add operand a to the result. 
-		Then, I shift operand a left by 1 bit and operand b right by 1 bit. This algorithm is a simple and commonly used method for multiplication.
+		The algorithm I followed for the multiplication operation is as follows: The function takes two operands, a and b. If the least significant bit of b is 1, I add operand a to the result. A picture is shown in figure 1 below that illustrates that concept.
+		<br>
+		Then, I shift operand a left by 1 bit and operand b right by 1 bit. This algorithm is a simple and commonly used method for multiplication. This algorithm is the first one that comes to mind when we think of multiplication and is a good
+one to start with as a shift by 1 bit is expected to consume 1 cycle, leading to a theoretically simpler design. The
+pseudocode for this algorithm is displayed in figure 2 below.
+	 <div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
 
 		<br> My code for the baseline design implements the logic described in the pseudocode. I use three registers for a, b, and the result. 
 		Additionally, I implement two shifters for logical left shifting and logical right shifting. I also use a multiplexer to add to the result when the least significant bit of 
 		operand b is 1. However, I did not implement the control logic, resulting in a fixed data flow. The control module would send control signals to the datapath module to modify how data 
 		flows into the registers. This includes accepting new values for operand registers, deciding whether to write to the result, and outputting the arithmetic result. The datapath sends 
 		the least significant bit of operand b to the control module for selecting the necessary data flow. The datapath structure is shown in Figure 3.
-
+        <center>
+		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>     
+       
 		<br> As indicated in the pseudocode, I need to execute a for loop. Therefore, this design requires at least 32 cycles to complete. In practice, my design takes around 34-35 cycles, including one cycle 
 		for data acceptance and one cycle to indicate completion. The finite state machine representing this design is shown in Figure 4.
-
+        <center>
+		<img src="assets/images/multiplier_fig4.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>     
+       
 		<br> The baseline design leverages patterns in the given data to optimize execution. In the case where operand b is 0, the hardware would check every bit in b, resulting in 32 
 		cycles without adding to the result. To improve efficiency, it would be ideal to handle this case with a single decision not to write to the result instead of 32 cycles.
 
@@ -225,12 +242,24 @@
 		<br> An alternative design idea involves leveraging the structure of 32-bit operands. If there is a repeated sequence of zeroes of length x in the second operand, the current algorithm contributes little to the result register, wasting x cycles. 
 		Instead, shifting x bits can be chosen, saving x-1 cycles in the implementation. The finite state machine for this alternative design is illustrated in Figure 5, using the caseZ strategy. The number of cycles varies between 3 and approximately 34 or 35, 
 		depending on the input.
-
+        <center>
+		<img src="assets/images/multiplier_fig5.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>     
+       
 		<br> One advantage of this idea is that it only requires minor changes to the dataflow. A control signal is added to the shifters, and the status signal is expanded to cover all 32 bits of the second operand. 
 		The hardware used in the alternative design is similar to the baseline design, with additional logic in the shifting process. By shifting by powers of 2, the number of cases to consider is minimized. 
 		However, it should be noted that the alternative design consumes more area and energy compared to the baseline design, although it theoretically improves efficiency by avoiding unnecessary cycles.
 
-		
+		<br> One of the pros of this idea is that our dataflow gets only a small change. We will just add a control signal to the
+shifters, and we will expand the status signal incorporated in the baseline design(which signaled the least significant bit of
+b) to the 32 bits of b as shown in figure 11. As shown for the data flow diagram of the alternative design in figure 11 that
+the hardware used in the alternative design is pretty similar to that used in the baseline design but there is some additional
+logic implemented like additional registers or muxes in the shifting logic.
+	       <center>
+		<img src="assets/images/multiplier_fig11.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>   	
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing</strong></font></h3></div>
 		<br> I tested the baseline and alternative design implementations using provided tests, as well as additional directed and random test cases. The directed and random test cases considered various input types, 
 		such as zeroes, ones, small and large numbers, positive and negative numbers, numbers with masked lower/middle bits, and combinations of these types. The inputs covered values from 0 to 32 bits, despite the technical 
@@ -241,7 +270,10 @@
 
 		<br> Although the test cases covered all possible scenarios, an alternative approach could have involved testing the datapath and control modules separately with individual tests. 
 		However, the test cases created were sufficient to verify the expected behavior, so there was no need for a different approach.
-
+       <center>
+		<img src="assets/images/multiplier_table1.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>   
 		
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluation</strong></font></h3></div>
 		<br> After completing the baseline and alternative implementations, I conducted performance tests on both designs. Using a simulator harness and a given dataset of numbers, I measured the total number of cycles and the average number of cycles per 
@@ -250,6 +282,25 @@
 		<br> The results are summarized in the table below, which clearly shows that the baseline design consistently performs at the same level across all input types. This is expected since it implements fixed latency. On the other hand, 
 		the alternative design demonstrates better performance than the baseline for all input datasets, leveraging consecutive zeros to minimize latency and maximize throughput. Figures 6 to 10 provide visual representations of the program's cycle count.
 
+	<div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/multiplier_fig6.png" id="rcimage1" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig7.png" id="rcimage2" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>  
+
+		
+	<div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/multiplier_fig8.png" id="rcimage1" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig9.png" id="rcimage2" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
+       
+       <center>
+		<img src="assets/images/multiplier_fig10.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>   
 		<br> Notably, the alternative design performed better on the small input dataset compared to the large input dataset. This can be attributed to the possibility of fewer consecutive zeros and denser inputs in the large dataset, making the design less efficient. 
 		Additionally, the alternative design exhibited superior performance with masked numbers due to the guaranteed presence of consecutive zeros. We had considered exploiting consecutive ones in negative numbers by converting them to their positive counterparts, 
 		performing multiplication, and then converting back to negative results. However, we were unable to implement this idea due to time constraints. These concepts, including parallelism and pipelining, could be explored in the future to further enhance efficiency, 
@@ -261,36 +312,11 @@
 		<br> Therefore, for applications heavily reliant on masked numbers or small and large inputs that are not negative, implementing the alternative design would yield substantial time savings, offsetting the associated hardware, area, and energy costs. However, 
 		for applications that do not heavily rely on these input datasets, the alternative design may not provide significant improvements considering the hardware, area, and energy costs involved.
   
-        <div class="column" style="display: flex; align-items: center;">
-  	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
- 	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
-	</div>
-		
-        <center>
-		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
+       <center>
+		<img src="assets/images/multiplier_table2.png" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>     
-       
-          
-	      <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
-         
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
-         
-       
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Conclusion</strong></font></h3></div>
-
+	</center>   
             
-            
-            
-            
-            
-	<center>
-		<img src="assets/images/pipelined4.jpg" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>     
-	
 		
 
 		</p>
