@@ -199,9 +199,9 @@ one to start with as a shift by 1 bit is expected to consume <span style="color:
 pseudocode for this algorithm is displayed in figure 2 below.
 	 <div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 290px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 290px; object-fit: contain;">
 	</div>
 
 		<br> My code for the <font color="gold"><strong>baseline</strong></font> design implements the logic described in the pseudocode. I use three registers for a, b, and the result. 
@@ -211,14 +211,14 @@ pseudocode for this algorithm is displayed in figure 2 below.
 		the least significant bit of operand b to the control module for selecting the necessary data flow. The datapath structure is shown in Figure 3.
         <center>
 		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="500" style="max-width:80%;border:3px solid #F1D16C;">
 	</center>     
        
 		<br> As indicated in the pseudocode, I need to execute a for loop. Therefore, this design requires at least <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 cycles</span> to complete. In practice, my design takes around <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">34-35 cycles</span>, including <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1 cycle</span>
 		for data acceptance and one cycle to indicate completion. The finite state machine representing this design is shown in Figure 4.
         <center>
 		<img src="assets/images/multiplier_fig4.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="300" style="max-width:80%;border:3px solid #F1D16C;">
 	</center>     
        
 		<br> The <font color="gold"><strong>baseline</strong></font> design leverages patterns in the given data to optimize execution. In the case where operand b is 0, the hardware would check every bit in b, resulting in <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 cycles</span> 
@@ -244,7 +244,7 @@ pseudocode for this algorithm is displayed in figure 2 below.
 		depending on the input.
         <center>
 		<img src="assets/images/multiplier_fig5.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="450" style="max-width:85%;border:3px solid #F1D16C;">
 	</center>     
        
 		<br> One advantage of this idea is that it only requires minor changes to the dataflow. A control signal is added to the shifters, and the status signal is expanded to cover all <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 bits</span> of the second operand. 
@@ -258,7 +258,7 @@ the hardware used in the <font color="gold"><strong>alternative</strong></font> 
 logic implemented like additional registers or muxes in the shifting logic.
 	       <center>
 		<img src="assets/images/multiplier_fig11.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="500" style="max-width:95%;border:5px solid #F1D16C;">
 	</center>   	
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing</strong></font></h3></div>
 		<br> I tested the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> design implementations using provided tests, as well as additional directed and random test cases. The directed and random test cases considered various input types, 
@@ -272,7 +272,7 @@ logic implemented like additional registers or muxes in the shifting logic.
 		However, the test cases created were sufficient to verify the expected behavior, so there was no need for a different approach.
        <center>
 		<img src="assets/images/multiplier_table1.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="600" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>   
 		
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluation</strong></font></h3></div>
@@ -284,17 +284,17 @@ logic implemented like additional registers or muxes in the shifting logic.
 
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/multiplier_fig6.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:55%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig7.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:55%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
 	</div>  
 
 		
 	<div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/multiplier_fig8.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 250px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig9.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 250px; object-fit: contain;">
 	</div>
        
        <center>
@@ -314,7 +314,7 @@ logic implemented like additional registers or muxes in the shifting logic.
   
        <center>
 		<img src="assets/images/multiplier_table2.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+            width="550" style="max-width:100%;border:5px solid #F1D16C;">
 	</center>   
             
 		
