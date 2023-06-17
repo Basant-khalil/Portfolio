@@ -236,7 +236,16 @@ showing that design is illustrated in figure 4.
           <br> By considering the possibilities of repeated sequences of zeros in operand b, the <font color="gold"><strong>alternative</strong></font> design aims to minimize wastage of cycles. 
           I introduced additional logic to detect consecutive zeros in operand b and perform multiple bit shifts when appropriate. 
           This approach allows me to process multiple bits at once, reducing the number of cycles required for the multiplication operation.
-          
+
+		<br> A better design idea would be taking advantage of the structure of our 32 bit operands. It is highly possible we will
+get a repeated sequence of zeroes of length x in the second operand. The algorithm we currently have will really not
+contribute to the result register, wasting x cycles. So, we can instead choose to shift x bits, saving x-1 cycles in the
+implementation. We will still need one cycle to figure out that there are actually x bits we can choose to not implement.
+The finite state machine for the alternative design is illustrated in figure 5 below.
+		  <center>
+		<img src="assets/images/multiplier_fig5.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>  
           <br> The <font color="gold"><strong>alternative</strong></font> design consists of several modules, including operand parsing, zero detection, shift control, and result accumulation. The operand parsing module extracts the bits of the operands and sends them 
           to the zero detection module. The zero detection module analyzes the operand bits and identifies consecutive sequences of zeros. When consecutive zeros are detected, the shift control module determines the number of bits that can be 
           shifted at once based on the length of the zero sequence. Finally, the result accumulation module adds the shifted bits to the result register.
