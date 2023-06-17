@@ -260,6 +260,7 @@ logic implemented like additional registers or muxes in the shifting logic.
 		<img src="assets/images/multiplier_fig11.png" id="frst" class="center"
             width="500" style="max-width:95%;border:6px solid #F1D16C;">
 	</center>   	
+		<br>
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing</strong></font></h3></div>
 		<br> I tested the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> design implementations using provided tests, as well as additional directed and random test cases. The directed and random test cases considered various input types, 
 		such as zeroes, ones, small and large numbers, positive and negative numbers, numbers with masked lower/middle bits, and combinations of these types. The inputs covered values from <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">0</span> to <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 bits</span>, despite the technical 
@@ -274,7 +275,7 @@ logic implemented like additional registers or muxes in the shifting logic.
 		<img src="assets/images/multiplier_table1.png" id="frst" class="center"
             width="700" style="max-width:100%;border:5px solid #F1D16C;">
 	</center>   
-		
+		<br>
 		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluation</strong></font></h3></div>
 		<br> After completing the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> implementations, I conducted performance tests on both designs. Using a simulator harness and a given dataset of numbers, I measured the total number of cycles and the average number of cycles per 
 		transaction for each design. To compare their performance under various inputs, I created eight different types of numbers for the simulator, including large numbers, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">masked bits</span>, negative numbers, and combinations thereof.
@@ -283,18 +284,18 @@ logic implemented like additional registers or muxes in the shifting logic.
 		the <font color="gold"><strong>alternative</strong></font> design demonstrates better performance than the <font color="gold"><strong>baseline</strong></font> for all input datasets, leveraging consecutive zeros to minimize latency and maximize throughput. Figures 6 to 10 provide visual representations of the program's cycle count.
 
 	<div class="column" style="display: flex;">
-  	<img src="assets/images/multiplier_fig6.png" id="rcimage1" 
-   	 style="max-width:55%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
+  	<img src="assets/images/multiplier_fig6.png" id="rcimage1; align-items: left;" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 150px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig7.png" id="rcimage2" 
-   	 style="max-width:55%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 100px; object-fit: contain;">
 	</div>  
 
 		
-	<div class="column" style="display: flex; align-items: center;">
+	<div class="column" style="display: flex; align-items: left;">
   	<img src="assets/images/multiplier_fig8.png" id="rcimage1" 
    	 style="max-width:60%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig9.png" id="rcimage2" 
-   	 style="max-width:60%;border:3px solid #F1D16C; height: 200px; object-fit: contain;">
+   	 style="max-width:60%;border:3px solid #F1D16C; height: 180px; object-fit: contain;">
 	</div>
        
        <center>
