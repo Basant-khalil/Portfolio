@@ -192,12 +192,32 @@
 		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
           
           <br> In the <font color="gold"><strong>baseline</strong></font> design, I implemented a fixed-latency iterative multiplier that operates on a 64-bit req_msg input, which includes the operands, and generates the lower 32 bits of the multiplication result. 
-          The algorithm I followed for executing the multiplication operation involves shifting the operands and adding them based on specific conditions.
-          
-          <br> The code for the <font color="gold"><strong>baseline</strong></font> design adheres closely to the pseudocode provided. It utilizes 3 registers for operands a, b, and the result, along with logical left and right shifters and a multiplexer for result addition when necessary. 
+		To reitrate , the baseline design is executed at the following interface: given a 64 bit req_msg that includes the operands, and other needed signals to follow the val/rdy interfaces, output the lower 32 bits result of the multiplication operation to the user.
+		A picture is shown in figure 1 below that illustrates that concept.
+          The algorithm I followed for executing the multiplication operation involves shifting the operands and adding them based on specific conditions. The function should include 2 operands , call them a and b, as illustrated in the
+pseudocode in figure 2.
+        <div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
+   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
+	</div>
+		<br>It utilizes 3 registers for operands a, b, and the result, along with logical left and right shifters and a multiplexer for result addition when necessary. 
+		This algorithm is the first one that comes to mind when we think of multiplication and is a good
+one to start with as a shift by 1 bit is expected to consume 1 cycle, leading to a theoretically simpler design.
           The control logic governs the flow of data in the design, enabling operations such as accepting new operand values, writing/not-writing to the result, and outputting the result. 
           While I implemented modularity to separate functionality into independent modules, I could have further utilized hierarchy to enhance code efficiency by reusing certain modules.
-          
+		The control module
+will send some control signals to the datapath module, changing the way data flows into registers. Some instances where
+this is implemented include when we accept new values for the operand registers, write or not-to-write to the result, and
+output an arithmetically executed result. For this to be implemented, the adatpath module will send the least significant bit
+of operand b to the control module such that it can select the needed data flow. In fact, the least significant bit of operand b
+is used to figure if we need to add to the sum of the result, which is also illustrated directly in the pseudocode. The datapath
+is illustrated in figure 3 below.
+        <center>
+		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>     
           <br> The <font color="gold"><strong>baseline</strong></font> design is based on patterns within the input data. However, in cases where the second operand b is zero, the hardware unnecessarily checks each bit, resulting in 32 cycles without any addition to the result. 
           Optimizing this pattern could significantly reduce the number of cycles required for such cases.
           
@@ -206,7 +226,13 @@
 	      <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
           <br> The <font color="gold"><strong>alternative</strong></font> design aims to address the high latency associated with the <font color="gold"><strong>baseline</strong></font> design by exploring different strategies for maximizing performance. One approach involves utilizing pipelining, although it incurs significant hardware costs. 
           Another approach leverages the structure of the 32-bit operands, specifically targeting consecutive sequences of zeros to enable shifting by more than one bit, thereby reducing execution time.
-            
+		As a matter of fact, my design takes from
+34-35 cycles as we need one cycle to accept data and one cycle to establish that we are done. The finite state machine
+showing that design is illustrated in figure 4.
+       <center>
+		<img src="assets/images/multiplier_fig4.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:3px solid #F1D16C;">
+	</center>  
           <br> By considering the possibilities of repeated sequences of zeros in operand b, the <font color="gold"><strong>alternative</strong></font> design aims to minimize wastage of cycles. 
           I introduced additional logic to detect consecutive zeros in operand b and perform multiple bit shifts when appropriate. 
           This approach allows me to process multiple bits at once, reducing the number of cycles required for the multiplication operation.
@@ -251,141 +277,11 @@
             
             
             
-		  In this project, I conducted a comparison between two pipelined processor implementations: one utilizing stalling to handle data hazards, and the other 
-		  incorporating both stalling and bypassing. Pipelining involves dividing the datapath and control modules into multiple stages using buffer registers, 
-		  which leads to potential speed improvements proportional to the number of pipelined stages. This technique enables the execution of multiple transactions 
-		  simultaneously, resulting in faster cycle times compared to single-stage processors.
-	<br>	  For this project, I designed two  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">5-stage</span> pipelined processors that support the  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">TinyRV2 ISA</span>. 
-		  The <font color="gold"><strong>baseline </strong></font> design employed stalling to resolve data hazards, 
-		  while the <font color="gold"><strong>alternative design</strong></font> utilized bypassing to enhance processor performance. Bypassing, achieved through special bypass paths from the  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Execute</span> stage (X),
-		   <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Memory</span> stage (M), and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Write-back</span> stage (W) to 
-		  the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Decode</span> stage (D), allows for more efficient resolution of data dependencies, eliminating the need for 
-		  stalling in many cases.  <span sfevaluation
-                                     tyle="color: gold; font-weight: bold; font-style: italic; display: inline;">Load (lw)</span> and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">Store (sw)</span> instructions are exceptions to bypassing.
-	<br>	  I anticipated improved transaction throughput with the alternative bypassed design compared to the <font color="gold"><strong>baseline </strong></font> design. I successfully implemented both designs,
-		  tested their functionality, and performed evaluations to compare their performance. The <font color="gold"><strong>alternative design</strong></font> featured additional control signals, 
-		  datapath structures, such as two multiplexers, and modifications to the stall and squash signals to accommodate bypassing. The only differences in the 
-		  datapath between the <font color="gold"><strong>alternative</strong></font> and <font color="gold"><strong>baseline</strong></font> designs were the two  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">four-input</span> multiplexers. Although the alternative design included bypassing, it required 
-		  fewer stall signals than the <font color="gold"><strong>baseline </strong></font> design, resulting in only a minor increase in cost.
 	<center>
 		<img src="assets/images/pipelined4.jpg" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>     
-	<br>	  While the alternative design's cycle time might be slightly longer due to the added bypass paths potentially lengthening the critical path, the increase in 
-		  power consumption would not be significant. The alternative design included a slight increase in complexity due to the additional multiplexers and bypass logic. 
-		  When running five different programs, including  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">vvadd-unopt</span>, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">vvadd-opt</span>,  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">cmult</span>,  
-		  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">bsearch</span>, and  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">mfilt</span>, 
-		  the alternative design executed fewer cycles than the 
-		  baseline design in most cases. The alternative design demonstrated better efficiency, saving multiple cycles for programs and exhibiting lower CPI on average 
-		  compared to the baseline design. More specifically, the CPI ratio of the baseline to the alternative design, as shown in the table above, is at least one. 
-		  In some programs like mfilt and bsearch, the CPI was larger than one. 
-	<br>	  The alternative design proves to be a superior implementation of the pipelined processor, delivering improved performance with minimal downsides, 
-		  
-		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
-		  Moving on to the baseline design, it is a five-stage stalling processor supporting the TinyRV2 ISA.The baseline design is illustrated in figure 2, where the blue signals display the control and status signals between the control and
-datapath units. I divided the design into two modules: the datapath, 
-		responsible for processing input data based on control signals, and the control module, managing data movement through the datapath. The five stages of the 
-		pipelined processor are Fetch (F), Decode (D), Execute (X), Memory (M), and Writeback (W). An initial framework design was given to base my design on, as shown in
-figure 3, and I implemented some changes in the datapath and the control unit to produce my final design.
-	<div class="column" style="display: flex; align-items: center;">
-  	<img src="assets/images/pipelined2.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
- 	 <img src="assets/images/pipelined3.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
-	</div>
-	<br>	To implement specific instructions like JAL and JALR, I made modifications to the Fetch stage, adding a multiplexer (pc_sel_mux_F) to accept multiple inputs. 
-		Other changes in the datapath included the addition of a multiplier (imul) in the Execute stage, a multiplexer (op1_sel_mux_D) in the Decode stage, two registers 
-		(op1_reg_X and op2_reg_X) between the Decode and Execute stages, a +4 structure (pc_incr_X) in the Execute stage, and a multiplexer (ex_result_sel_mux_X) in the 
-		Execute stage. The instructions the baseline design should implement are shown in figure 4. The new structures I implemented are highlighted in figure 5. 
-	<div class="column" style="display: flex; align-items: center;">
-  	<img src="assets/images/pipelined4.png" id="rcimage1" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
- 	 <img src="assets/images/pipelined5.png" id="rcimage2" 
-   	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
-	</div>
-	<br>	The baseline design provided a comprehensive implementation of the TinyRV2 ISA for comparison purposes. However, there was still room for improvement. 
-		Splitting the control and datapath modules facilitated readability and debugging, allowing me to identify errors quickly. The design incorporated a system of 
-		valid/ready response and answer signals, ensuring consistent operation despite variations in fetching instructions and data from memory. This system also 
-		accommodated multi-cycle to select the appropriate bypassed value. In the alternative design, I added additional control signals to support full bypassing, 
-		ensuring that the bypass paths are activated only when necessary.
-	      <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
-		The alternative design incorporates minimal changes to the datapath compared to the baseline design. The only notable differences are the addition of two 
-		four-input multiplexers in the Decode stage. These multiplexers receive the bypassed values from the X, M, and W stages, along with the value read from the 
-		register file. These multiplexers enable the selection of the correct input value based on the bypassing paths. As shown in figure 6, I added two muxes in the Decode stage after the register file.
-	<center>
-		<img src="assets/images/pipelined6.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>     
-	<br>	Despite the inclusion of bypassing, the alternative design requires fewer stall signals compared to the baseline design. This means that only a few additional 
-		transistors are needed to support bypassing, making the cost increase of the alternative design negligible. Although the bypass paths may add more time to the 
-		critical path, resulting in a slightly longer cycle time compared to the baseline design, the power increase is not significant. The additional power usage is 
-		offset by the slower cycle time, resulting in similar power usage for both designs.
 	
-	<br>	To evaluate the performance of the designs, I executed five different programs: vvadd-unopt, vvadd-opt, cmult, bsearch, and mfilt. In most programs, 
-		the alternative design demonstrated a reduction in the number of cycles executed compared to the baseline design. The best-case scenario showed a 
-		reduction of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2695</span> cycles for the alternative design (for the mfilt program), while the worst-case scenario required the same number of cycles as the 
-		baseline design (<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">589</span> cycles for the vvadd-opt program). However, on average, the CPI ratio of the baseline to the alternative design was at least one, 
-		indicating that the alternative design is more efficient and saves multiple cycles for most programs. The CPI ratio was larger than one for programs 
-		like mfilt and bsearch.
-		
-	
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing Strategy</strong></font></h3></div>
-		At my implementation, I followed a systematic testing strategy to ensure the correctness and performance of my designs. 
-		The testing process involved multiple stages and different types of tests. Here is an overview of my testing strategy:
-	<br>	&bull;Component-Level Testing: I began by testing each individual component of the design in isolation to ensure they function correctly. This involved 
-		verifying the performance of components such as the ALU (Arithmetic Logic Unit) and the immediate value generator. I implemented a set of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">14</span> unit tests 
-		specifically designed for these components. For the immediate value generator, I covered various immediate types and tested both positive and negative values 
-		to ensure correct extension. Similarly, for the ALU, I implemented at least five different tests for each operation, checking different positive and negative 
-		values to validate proper handling of signed and unsigned values.
-	<br>    &bull;Integration Testing: Once the individual components were tested, I proceeded to test the larger operations performed by my CPU. In total, I 
-		implemented 268 test functions to cover different cases and scenarios. I started by running each operation in isolation whenever possible to verify 
-		the functionality of the control system and datapath beyond the ALU. This step ensured that everything outside the ALU, including dependencies and 
-		register handling, worked as expected. I also introduced dependencies between input and output registers of different functions to test the stalling 
-		and bypassing mechanisms. I used a variety of input-output register patterns, including cases with identical registers within a single instruction. 
-		Furthermore, I introduced different numbers of NOPs between instructions to validate correct behavior across different stages. I paid special 
-		attention to potential corner cases, such as consecutive multiply instructions, which could affect data loading and output from the multiply unit.
-	<br>	&bull;Control Operation Testing: Testing control operations like branches and jumps required a slightly different approach. To ensure correctness, I 
-		used addi instructions to track the control flow, setting specific bits depending on the program path. This method allowed me to check the behavior 
-		of these operations accurately. I implemented various dependencies and verified that only the intended instructions were executed.
-	<br>	&bull;Random Testing: Random testing played a crucial role in validating the arithmetic operations. Although it was challenging to devise meaningful random 
-		tests for certain instructions, I extensively used random input values to verify the output against the expected result. Additionally, I introduced delays in o
-		ur tests to assess the CPU's robustness against potential issues in the inputs.
-	
-<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
-		In my evaluation, I compared the performance of both the baseline design and the alternative design by executing five benchmark programs. 
-		Here are the key findings:
-	<br>	&bull;vvadd-unopt: This program, an unoptimized version of vector-vector addition, exhibited significant performance improvement with the alternative design 
-		compared to the baseline. The baseline design had a CPI (Cycles Per Instruction) of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2.22</span>, while the alternative design reduced it to  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.34</span> by utilizing bypassing 
-		for load-use dependencies.
-	<br>	&bull;vvadd-opt: In this optimized version of vector-vector addition, where multiple values are loaded simultaneously and added with minimal stalls, there was no 
-		noticeable difference in performance between the baseline and alternative designs. This demonstrates how assembly code optimized for specific microarchitectures 
-		within a given ISA can substantially improve performance but may not be applicable in general cases.
-	<br>	&bull;cmult: The alternative design showed modest performance improvements in the "cmult" program, where two arrays of complex numbers are multiplied elementwise. 
-		The potential pipeline stalls caused by the multiplication instructions limited the performance gain from bypassing.
-	<br>	&bull;bsearch: The "bsearch" program, which performs a binary search on an array, showed a substantial performance improvement with the alternative design over the baseline. 
-		The alternative design reduced the required number of cycles by a factor of two compared to the baseline. The bypassing mechanism significantly accelerated the 
-		operations that relied on previous instructions' outcomes.
-	<br>	&bull;mfilt: The "mfilt" baseline program, which applies a filter to a two-dimensional array, also demonstrated a notable reliance on bypassing for improved performance. 
-		The alternative design's bypassing capabilities sped up the operations that heavily depended on previous results.
-		
-	<br>	In terms of implementation considerations, both designs were expected to have a similar area requirement, with the only notable difference 
-		being the addition of two four-input multiplexers in the alternative design. The control logic for the alternative design was slightly more complex 
-		but required fewer stall signals. Thus, the overall difference in required transistors between the two designs was expected to be minimal.
-		
-	<br>	Regarding cycle time, the alternative design was projected to have a slightly longer cycle time due to the bypass paths. However, the impact on 
-		the cycle time would depend on the critical path components. If components such as reading from the register file were already slow in the baseline 
-		design, the bypass paths might not add significant additional time. Nonetheless, operations like reading from memory were expected to be among the 
-		slowest, and in such cases, the cycle time increase in the alternative design would likely be manageable compared to the benefits of bypassing. The 
-		same analysis applied if the critical path in the baseline design involved the ALU.
-		
-	<br>	Although the alternative design's bypassing mechanism introduced additional logic and potentially increased energy consumption per cycle, the overall
-		difference in power usage was not expected to be substantial. The increased power usage per cycle would be partially offset by the slower cycle time in the 
-		alternative design.
-		
-	<br>	Considering the performance advantages, the comparable area and power requirements, and the minimal downsides, the alternative design was deemed a better choice 
-		in general. The improved CPI and the expected net decrease in execution time for most applications made the alternative design preferable over the baseline. The 
-		baseline design would only outperform the alternative design if the two added multiplexers slowed down the critical path by a factor of  <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1.61</span>, which was unlikely. 
-		Therefore, the alternative design provided superior performance and justified the slight increase in area and energy usage.
 		
 
 		</p>
