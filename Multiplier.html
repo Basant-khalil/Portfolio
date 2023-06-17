@@ -251,8 +251,8 @@ pseudocode for this algorithm is displayed in figure 2 below.
 		The hardware used in the alternative design is similar to the baseline design, with additional logic in the shifting process. By shifting by powers of 2, the number of cases to consider is minimized. 
 		However, it should be noted that the alternative design consumes more area and energy compared to the baseline design, although it theoretically improves efficiency by avoiding unnecessary cycles.
 
-		<br> One of the pros of this idea is that our dataflow gets only a small change. We will just add a control signal to the
-shifters, and we will expand the status signal incorporated in the baseline design(which signaled the least significant bit of
+		<br> One of the pros of this idea is that our dataflow gets only a small change. I will just add a control signal to the
+shifters, and I will expand the status signal incorporated in the baseline design(which signaled the least significant bit of
 b) to the 32 bits of b as shown in figure 11. As shown for the data flow diagram of the alternative design in figure 11 that
 the hardware used in the alternative design is pretty similar to that used in the baseline design but there is some additional
 logic implemented like additional registers or muxes in the shifting logic.
@@ -265,7 +265,7 @@ logic implemented like additional registers or muxes in the shifting logic.
 		such as zeroes, ones, small and large numbers, positive and negative numbers, numbers with masked lower/middle bits, and combinations of these types. The inputs covered values from 0 to 32 bits, despite the technical 
 		width of all inputs being 32 bits. Random tests also included test source/sink delays to check the val/rdy interface.
 
-		<br> A summary table below shows the types of cases we checked. The baseline design passed all tests, while the alternative design failed some of them. To ensure accurate outputs at expected times, line traces were used for detailed testing. 
+		<br> A summary table below shows the types of cases I checked. The baseline design passed all tests, while the alternative design failed some of them. To ensure accurate outputs at expected times, line traces were used for detailed testing. 
 		After analyzing the errors in the alternative design, I was able to fix them and make both the baseline and alternative designs pass the test cases.
 
 		<br> Although the test cases covered all possible scenarios, an alternative approach could have involved testing the datapath and control modules separately with individual tests. 
@@ -302,8 +302,8 @@ logic implemented like additional registers or muxes in the shifting logic.
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>   
 		<br> Notably, the alternative design performed better on the small input dataset compared to the large input dataset. This can be attributed to the possibility of fewer consecutive zeros and denser inputs in the large dataset, making the design less efficient. 
-		Additionally, the alternative design exhibited superior performance with masked numbers due to the guaranteed presence of consecutive zeros. We had considered exploiting consecutive ones in negative numbers by converting them to their positive counterparts, 
-		performing multiplication, and then converting back to negative results. However, we were unable to implement this idea due to time constraints. These concepts, including parallelism and pipelining, could be explored in the future to further enhance efficiency, 
+		Additionally, the alternative design exhibited superior performance with masked numbers due to the guaranteed presence of consecutive zeros. I had considered exploiting consecutive ones in negative numbers by converting them to their positive counterparts, 
+		performing multiplication, and then converting back to negative results. However, I were unable to implement this idea due to time constraints. These concepts, including parallelism and pipelining, could be explored in the future to further enhance efficiency, 
 		minimize latency, and improve performance.
 
 		<br> In summary, the alternative design outperformed the baseline design across all tested input datasets, although the improvement was more significant for small input datasets. The alternative design does incur higher hardware costs, requiring additional muxes, adders, 
