@@ -169,118 +169,118 @@
         </header>
         <section class="about-text">
           <p>
-            In today's technology-driven world, multiplication plays a crucial role in various algorithms and programs, particularly in digital signal processing. 
-            However, performing multiplications inefficiently can lead to significant time wastage. 
-            <br> With the increasing reliance on technology and the Internet of Things (<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">IoT</span>), 
-            the need for efficient multiplication methods becomes even more critical. To address this need, I developed two implementations of an interactive multiplier: 
-            the <font color="gold"><strong>baseline</strong></font> design and the <font color="gold"><strong>alternative</strong></font> design. The <font color="gold"><strong>baseline</strong></font> design is a fixed-latency, iterative multiplier that always takes the same number of cycles (34-35 cycles). 
-            In contrast, the <font color="gold"><strong>alternative</strong></font> design is a variable-latency iterative multiplier that leverages the properties of the input operands to reduce execution time. 
-            It can complete the multiplication operation in as few as 4 cycles or up to 34 cycles, depending on the input.
-            <br> In the <font color="gold"><strong>alternative</strong></font> design, I exploit the structure of the operands to minimize the number of cycles required. By shifting more than one bit at a time in the presence of consecutive zeros, 
-            I can significantly reduce the execution time. However, it's important to note that while the <font color="gold"><strong>alternative</strong></font> design offers better performance in terms of cycle reduction, 
-            it also incurs higher hardware costs in terms of area and energy consumption.
-            
-            <br> Through extensive testing and evaluation of the two designs, I found that the <font color="gold"><strong>alternative</strong></font> design consistently outperformed the <font color="gold"><strong>baseline</strong></font>  design across various types of input datasets. 
-            The <font color="gold"><strong>alternative</strong></font> design demonstrated better performance, especially with small input datasets that had a higher likelihood of containing consecutive zeros that could be efficiently exploited. 
-            However, it is essential to consider the higher hardware costs associated with the <font color="gold"><strong>alternative</strong></font> design when evaluating its effectiveness and efficiency in specific applications that can accommodate 
-            such energy and area consumption.
-            
-            <br> I believe that the <font color="gold"><strong>alternative</strong></font> design holds significant potential for implementation in various applications and algorithms, offering improved efficiency while still meeting technology constraints, 
-            such as energy consumption limits. Moving forward, I envision the <font color="gold"><strong>alternative</strong></font> design being adopted in numerous domains, harnessing its performance benefits while staying within the desired technology constraints.
+		  Multiplication plays a critical role in algorithms and programs, especially those related to digital signal processing. Inefficient multiplication can result in wasted time, particularly with the increasing reliance on technology and the Internet of Things (<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">IoT</span>). 
+		  To address this, my group developed an interactive integer multiplier that efficiently supports multiplication operations. This multiplier can be implemented in a multicore processor alongside other modules.
 
+		  <br> I created two implementations: the baseline design and the alternative design. The baseline design is a fixed-latency iterative multiplier with a consistent number of cycles. 
+		  The alternative design, on the other hand, is a variable-latency iterative multiplier that leverages properties of the input operands to reduce execution time, resulting in a variable number of cycles ranging from 4 to 34. 
+		  By exploiting the structure of the operands, I aimed to decrease the required cycles in the alternative design. Shifting multiple bits at once in the presence of consecutive zeros was a key technique. 
+		  While the alternative design may have a slightly higher area and energy consumption, the clock frequency overhead is expected to be minimal.
 
+		  <br> Through testing, I found that the alternative design significantly outperformed the baseline design in terms of cycle usage. The alternative design used an average of 35.12 cycles per multiplication, 
+		  whereas the <font color="gold"><strong>baseline</strong></font> design required anywhere from 5 to 31 cycles per multiplication. These results demonstrate that the alternative design consistently delivered superior performance across various input datasets. 
+		  In contrast, the baseline design failed to exploit the nature of different input datasets, leading to wasted cycles.
+
+		  <br> Specifically, the alternative design excelled with small input datasets, benefiting from consecutive zeros that could be leveraged for optimization. It achieved a remarkable reduction of 30.12 cycles per multiplication 
+		  compared to the baseline design for such datasets. It's important to note that the alternative design incurred higher hardware costs in terms of area and energy consumption compared to the baseline design.
+
+		  <br> Considering the trade-off between cycle reduction and increased hardware use, the alternative design proves to be more effective and efficient for applications where technology constraints allow for higher energy and 
+		  area consumption. My group anticipates widespread adoption of the alternative design in various applications and algorithms, while ensuring compliance with specific technology constraints, such as energy consumption limits.
+
+		  <br> To validate my findings, I will implement both the baseline and alternative designs, conduct thorough testing, and perform a comprehensive evaluation comparing the two implementations in this project.
+
+		  
 		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
-          
-          <br> In the <font color="gold"><strong>baseline</strong></font> design, I implemented a fixed-latency iterative multiplier that operates on a 64-bit req_msg input, which includes the operands, and generates the lower 32 bits of the multiplication result. 
-		To reitrate , the baseline design is executed at the following interface: given a 64 bit req_msg that includes the operands, and other needed signals to follow the val/rdy interfaces, output the lower 32 bits result of the multiplication operation to the user.
-		A picture is shown in figure 1 below that illustrates that concept.
-          The algorithm I followed for executing the multiplication operation involves shifting the operands and adding them based on specific conditions. The function should include 2 operands , call them a and b, as illustrated in the
-pseudocode in figure 2.
+          <br> The baseline design performs the following task: given a 64-bit req_msg with operands and necessary signals for val/rdy interfaces, it outputs the lower 32 bits result of the multiplication operation to the user. 
+		The algorithm I followed for the multiplication operation is as follows: The function takes two operands, a and b. If the least significant bit of b is 1, I add operand a to the result. 
+		Then, I shift operand a left by 1 bit and operand b right by 1 bit. This algorithm is a simple and commonly used method for multiplication.
+
+		<br> My code for the baseline design implements the logic described in the pseudocode. I use three registers for a, b, and the result. 
+		Additionally, I implement two shifters for logical left shifting and logical right shifting. I also use a multiplexer to add to the result when the least significant bit of 
+		operand b is 1. However, I did not implement the control logic, resulting in a fixed data flow. The control module would send control signals to the datapath module to modify how data 
+		flows into the registers. This includes accepting new values for operand registers, deciding whether to write to the result, and outputting the arithmetic result. The datapath sends 
+		the least significant bit of operand b to the control module for selecting the necessary data flow. The datapath structure is shown in Figure 3.
+
+		<br> As indicated in the pseudocode, I need to execute a for loop. Therefore, this design requires at least 32 cycles to complete. In practice, my design takes around 34-35 cycles, including one cycle 
+		for data acceptance and one cycle to indicate completion. The finite state machine representing this design is shown in Figure 4.
+
+		<br> The baseline design leverages patterns in the given data to optimize execution. In the case where operand b is 0, the hardware would check every bit in b, resulting in 32 
+		cycles without adding to the result. To improve efficiency, it would be ideal to handle this case with a single decision not to write to the result instead of 32 cycles.
+
+		<br> I employed modularity, which separates the program's functionality into independent modules, such as shifters, registers, and adders. Each module was individually tested for correctness. 
+		Alternatively, hierarchy, an organizational structure based on importance levels, could have been implemented. In the figure 3 diagram, each register has a nearby multiplexer for input direction. 
+		Instead, I could have designed a module implementing this structure and used it three times. This would have allowed for unit testing or staged testing. 
+		In my approach, I tested all functionality at once. By reusing the module three times, I could have identified RTL bugs earlier and achieved more efficient code. 
+		Nonetheless, I ensured that encapsulation (relevant to the val/rdy interface) was a critical component of our design.
+
+		
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
+		<br> The main drawback of the baseline design is the high latency involved in executing the multiplication operation. In this project, I will present ideas for improving performance by increasing throughput and reducing latency. 
+		Caching and indirection can theoretically be exploited, but they are not permitted. Instead, pipelining can be used for the multiplier, considering the execution of operands to maximize performance. 
+		One approach is to exploit sequential occurrences of zeroes, allowing for shifting by more than 1 bit when possible. This reduces granularity and hardware costs, resulting in higher performance compared to the baseline design.
+
+		<br> Another consideration is that pipelining can be employed due to the linear nature of the finite state machine dataflow. By introducing stages between state changes and utilizing the val/rdy interface, data flow can be controlled. 
+		However, this approach incurs significant hardware costs, such as multiple registers, multiplexers, shifters, and full adders. Therefore, it may not be an ideal solution unless repeated multiplications are required.
+
+		<br> An alternative design idea involves leveraging the structure of 32-bit operands. If there is a repeated sequence of zeroes of length x in the second operand, the current algorithm contributes little to the result register, wasting x cycles. 
+		Instead, shifting x bits can be chosen, saving x-1 cycles in the implementation. The finite state machine for this alternative design is illustrated in Figure 5, using the caseZ strategy. The number of cycles varies between 3 and approximately 34 or 35, 
+		depending on the input.
+
+		<br> One advantage of this idea is that it only requires minor changes to the dataflow. A control signal is added to the shifters, and the status signal is expanded to cover all 32 bits of the second operand. 
+		The hardware used in the alternative design is similar to the baseline design, with additional logic in the shifting process. By shifting by powers of 2, the number of cases to consider is minimized. 
+		However, it should be noted that the alternative design consumes more area and energy compared to the baseline design, although it theoretically improves efficiency by avoiding unnecessary cycles.
+
+		
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing</strong></font></h3></div>
+		<br> I tested the baseline and alternative design implementations using provided tests, as well as additional directed and random test cases. The directed and random test cases considered various input types, 
+		such as zeroes, ones, small and large numbers, positive and negative numbers, numbers with masked lower/middle bits, and combinations of these types. The inputs covered values from 0 to 32 bits, despite the technical 
+		width of all inputs being 32 bits. Random tests also included test source/sink delays to check the val/rdy interface.
+
+		<br> A summary table below shows the types of cases we checked. The baseline design passed all tests, while the alternative design failed some of them. To ensure accurate outputs at expected times, line traces were used for detailed testing. 
+		After analyzing the errors in the alternative design, I was able to fix them and make both the baseline and alternative designs pass the test cases.
+
+		<br> Although the test cases covered all possible scenarios, an alternative approach could have involved testing the datapath and control modules separately with individual tests. 
+		However, the test cases created were sufficient to verify the expected behavior, so there was no need for a different approach.
+
+		
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluation</strong></font></h3></div>
+		<br> After completing the baseline and alternative implementations, I conducted performance tests on both designs. Using a simulator harness and a given dataset of numbers, I measured the total number of cycles and the average number of cycles per 
+		transaction for each design. To compare their performance under various inputs, I created eight different types of numbers for the simulator, including large numbers, masked bits, negative numbers, and combinations thereof.
+
+		<br> The results are summarized in the table below, which clearly shows that the baseline design consistently performs at the same level across all input types. This is expected since it implements fixed latency. On the other hand, 
+		the alternative design demonstrates better performance than the baseline for all input datasets, leveraging consecutive zeros to minimize latency and maximize throughput. Figures 6 to 10 provide visual representations of the program's cycle count.
+
+		<br> Notably, the alternative design performed better on the small input dataset compared to the large input dataset. This can be attributed to the possibility of fewer consecutive zeros and denser inputs in the large dataset, making the design less efficient. 
+		Additionally, the alternative design exhibited superior performance with masked numbers due to the guaranteed presence of consecutive zeros. We had considered exploiting consecutive ones in negative numbers by converting them to their positive counterparts, 
+		performing multiplication, and then converting back to negative results. However, we were unable to implement this idea due to time constraints. These concepts, including parallelism and pipelining, could be explored in the future to further enhance efficiency, 
+		minimize latency, and improve performance.
+
+		<br> In summary, the alternative design outperformed the baseline design across all tested input datasets, although the improvement was more significant for small input datasets. The alternative design does incur higher hardware costs, requiring additional muxes, adders, 
+		and shifters compared to the baseline design. This translates to increased hardware, area, and energy consumption. The complexity of a design, reflected in the number of logic gates and registers, directly affects power consumption.
+
+		<br> Therefore, for applications heavily reliant on masked numbers or small and large inputs that are not negative, implementing the alternative design would yield substantial time savings, offsetting the associated hardware, area, and energy costs. However, 
+		for applications that do not heavily rely on these input datasets, the alternative design may not provide significant improvements considering the hardware, area, and energy costs involved.
+  
         <div class="column" style="display: flex; align-items: center;">
   	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
    	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
  	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
    	 style="max-width:50%;border:3px solid #F1D16C; height: 300px; object-fit: contain;">
 	</div>
-		<br>It utilizes 3 registers for operands a, b, and the result, along with logical left and right shifters and a multiplexer for result addition when necessary. 
-		This algorithm is the first one that comes to mind when we think of multiplication and is a good
-one to start with as a shift by 1 bit is expected to consume 1 cycle, leading to a theoretically simpler design.
-          The control logic governs the flow of data in the design, enabling operations such as accepting new operand values, writing/not-writing to the result, and outputting the result. 
-          While I implemented modularity to separate functionality into independent modules, I could have further utilized hierarchy to enhance code efficiency by reusing certain modules.
-		The control module
-will send some control signals to the datapath module, changing the way data flows into registers. Some instances where
-this is implemented include when we accept new values for the operand registers, write or not-to-write to the result, and
-output an arithmetically executed result. For this to be implemented, the adatpath module will send the least significant bit
-of operand b to the control module such that it can select the needed data flow. In fact, the least significant bit of operand b
-is used to figure if we need to add to the sum of the result, which is also illustrated directly in the pseudocode. The datapath
-is illustrated in figure 3 below.
+		
         <center>
 		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
             width="500" style="max-width:95%;border:3px solid #F1D16C;">
 	</center>     
-          <br> The <font color="gold"><strong>baseline</strong></font> design is based on patterns within the input data. However, in cases where the second operand b is zero, the hardware unnecessarily checks each bit, resulting in 32 cycles without any addition to the result. 
-          Optimizing this pattern could significantly reduce the number of cycles required for such cases.
-          
-          <br> 
+       
           
 	      <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
-          <br> The <font color="gold"><strong>alternative</strong></font> design aims to address the high latency associated with the <font color="gold"><strong>baseline</strong></font> design by exploring different strategies for maximizing performance. One approach involves utilizing pipelining, although it incurs significant hardware costs. 
-          Another approach leverages the structure of the 32-bit operands, specifically targeting consecutive sequences of zeros to enable shifting by more than one bit, thereby reducing execution time.
-		As a matter of fact, my design takes from
-34-35 cycles as we need one cycle to accept data and one cycle to establish that we are done. The finite state machine
-showing that design is illustrated in figure 4.
-       <center>
-		<img src="assets/images/multiplier_fig4.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>  
-          <br> By considering the possibilities of repeated sequences of zeros in operand b, the <font color="gold"><strong>alternative</strong></font> design aims to minimize wastage of cycles. 
-          I introduced additional logic to detect consecutive zeros in operand b and perform multiple bit shifts when appropriate. 
-          This approach allows me to process multiple bits at once, reducing the number of cycles required for the multiplication operation.
-
-		<br> A better design idea would be taking advantage of the structure of our 32 bit operands. It is highly possible we will
-get a repeated sequence of zeroes of length x in the second operand. The algorithm we currently have will really not
-contribute to the result register, wasting x cycles. So, we can instead choose to shift x bits, saving x-1 cycles in the
-implementation. We will still need one cycle to figure out that there are actually x bits we can choose to not implement.
-The finite state machine for the alternative design is illustrated in figure 5 below.
-		  <center>
-		<img src="assets/images/multiplier_fig5.png" id="frst" class="center"
-            width="500" style="max-width:95%;border:3px solid #F1D16C;">
-	</center>  
-          <br> The <font color="gold"><strong>alternative</strong></font> design consists of several modules, including operand parsing, zero detection, shift control, and result accumulation. The operand parsing module extracts the bits of the operands and sends them 
-          to the zero detection module. The zero detection module analyzes the operand bits and identifies consecutive sequences of zeros. When consecutive zeros are detected, the shift control module determines the number of bits that can be 
-          shifted at once based on the length of the zero sequence. Finally, the result accumulation module adds the shifted bits to the result register.
-          
-          <br> To optimize the performance of the <font color="gold"><strong>alternative</strong></font> design, I carefully considered the trade-off between hardware cost and execution time reduction. 
-          By detecting consecutive zeros in operand b and performing multi-bit shifts, I can achieve significant cycle reduction. However, this approach requires additional logic and hardware resources, resulting in increased area and energy consumption.
-          
-          
+         
 <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluataion</strong></font></h3></div>
-          <br> To evaluate the performance of both the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> designs, I conducted extensive testing using various input datasets. 
-          I measured the execution time, cycle count, and hardware resource utilization for each design. The evaluation was performed on different platforms with varying constraints to ensure a comprehensive assessment.
-          
-          <br> In my experiments, I observed that the <font color="gold"><strong>alternative</strong></font> design consistently outperformed the <font color="gold"><strong>baseline</strong></font> design, especially with input datasets containing consecutive sequences of zeros. 
-          For such cases, the <font color="gold"><strong>alternative</strong></font> design achieved a substantial reduction in execution time and cycle count compared to the <font color="gold"><strong>baseline</strong></font> design. However, it's important to note that the alternative design incurred higher hardware costs in terms of area and energy consumption.
-          
-          <br> I also evaluated the <font color="gold"><strong>alternative</strong></font> design's scalability by varying the input dataset size. The results demonstrated that the <font color="gold"><strong>alternative</strong></font> design's performance advantage became more pronounced as the input dataset size increased. 
-          This finding suggests that the <font color="gold"><strong>alternative</strong></font> design is particularly beneficial for applications involving larger datasets or repetitive multiplication operations.
-          
-          <br> Furthermore, I conducted a comparative analysis of the hardware resource utilization between the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> designs. The <font color="gold"><strong>alternative design</strong></font> design required additional logic and registers to implement the zero detection, shift control, and result accumulation modules. 
-          As a result, it consumed more area and energy compared to the <font color="gold"><strong>baseline</strong></font> design. This trade-off between performance and hardware costs should be carefully considered when deciding which design to use in a specific application or system.
-          
+         
        
 <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Conclusion</strong></font></h3></div>
-<br> In conclusion, this project focused on developing an efficient interactive integer multiplier by implementing both a <font color="gold"><strong>baseline</strong></font> design and an <font color="gold"><strong>alternative</strong></font> design. 
-          The <font color="gold"><strong>baseline</strong></font> design is a fixed-latency iterative multiplier, while the <font color="gold"><strong>alternative</strong></font> design is a variable-latency iterative multiplier that leverages the structure of the operands to reduce execution time.
 
-          <br> Through extensive testing and evaluation, I found that the <font color="gold"><strong>alternative</strong></font> design consistently outperformed the <font color="gold"><strong>baseline</strong></font> design, achieving significant reductions in execution time and cycle count, particularly for input datasets with consecutive sequences of zeros. 
-          However, it's important to consider the higher hardware costs associated with the <font color="gold"><strong>alternative</strong></font> design in terms of area and energy consumption.
-          
-          <br> The <font color="gold"><strong>alternative</strong></font> design holds great potential for applications and algorithms that prioritize performance and can accommodate the associated hardware costs. 
-          By exploiting the structure of the operands and performing multi-bit shifts, the <font color="gold"><strong>alternative</strong></font> design offers improved efficiency and reduced execution time. 
-          As technology advances and hardware constraints evolve, the <font color="gold"><strong>alternative</strong></font> design can be further optimized and tailored to specific requirements, enabling even greater performance gains.
-
-            
-            
             
             
             
