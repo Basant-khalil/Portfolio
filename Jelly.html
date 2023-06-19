@@ -1,1 +1,345 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=500px, initial-scale=3.0">
+  <title>BasantKhalil</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Basant Khalil" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Basant khalil">Basant Khalil</h1>
+          <p class="title">
+            <span style="color: #FFFC33;"><big>Software Engineer</big></span><span style="color: #33FFFC;">Electrical&amp;Computer Engineer</span></p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:bak94@cornell.edu" class="contact-link">bak94@cornell.edu</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+6147178842" class="contact-link">+1 (614) 717-8842</a>
+            </div>
+
+          </li>
+          
+           <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+
+              <a href="https://github.com/Basant-khalil" class="contact-link">https://github.com/Basant-khalil</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Columbus, Ohio, USA</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://github.com/Basant-khalil" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+  	  <li class="social-item">
+            <a href="https://www.linkedin.com/in/basantKhalil" class="social-link">
+            <ion-icon name="logo-linkedIn"></ion-icon>
+             </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+<div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+	<li>
+          <button class="navbar-link active" data-nav-link onclick="window.location.href='https://basant-khalil.github.io/Portfolio/'">Back</button>
+        </li>
+
+        </ul>
+
+      </nav>
+ 
+      <!-------------------------------------------------------------------- Article Text -------------------------------------------------------------------->
+      <article class="about  active" data-page="Jelly">
+        <header>
+          <h2 class="h2 article-title">Shell-Jelly 🆘</h2>
+        </header>
+        <section class="about-text">
+          <p>
+		  Multiplication plays a critical role in algorithms and programs, especially those related to digital signal processing. Inefficient multiplication can result in wasted time, particularly with the increasing reliance on technology and the Internet of Things (<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">IoT</span>). 
+		  To address this, I developed an interactive integer multiplier that efficiently supports multiplication operations. This multiplier can be implemented in a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">multicore</span> processor alongside other modules.
+
+		  <br> I created two implementations: the <font color="gold"><strong>baseline</strong></font> design and the <font color="gold"><strong>alternative</strong></font> design. The <font color="gold"><strong>baseline</strong></font> design is a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">fixed-latency iterative multiplier</span> with a consistent number of cycles. 
+		  The <font color="gold"><strong>alternative</strong></font> design, on the other hand, is a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">variable-latency iterative multiplier</span> that leverages properties of the input operands to reduce execution time, resulting in a variable number of cycles ranging from <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">4</span> to <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">34</span> 
+		  By exploiting the structure of the operands, I aimed to decrease the required cycles in the <font color="gold"><strong>alternative</strong></font> design. Shifting multiple bits at once in the presence of consecutive zeros was a key technique. 
+		  While the <font color="gold"><strong>alternative</strong></font> design may have a slightly <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">higher area</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">energy</span> consumption, the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">clock frequency overhead</span> is expected to be minimal.
+
+		  <br> Through testing, I found that the <font color="gold"><strong>alternative</strong></font> design significantly outperformed the <font color="gold"><strong>baseline</strong></font> design in terms of cycle usage. The <font color="gold"><strong>alternative</strong></font> design used an average of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">35.12</span> cycles per <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">multiplication</span>, 
+		  whereas the <font color="gold"><strong>baseline</strong></font> design required anywhere from <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">5</span> to <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">31</span> cycles per multiplication. These results demonstrate that the <font color="gold"><strong>alternative</strong></font> design consistently delivered superior performance across various input datasets. 
+		  In contrast, the <font color="gold"><strong>baseline</strong></font> design failed to exploit the nature of different input datasets, leading to wasted cycles.
+
+		  <br> Specifically, the <font color="gold"><strong>alternative</strong></font> design excelled with small input datasets, benefiting from consecutive zeros that could be leveraged for optimization. It achieved a remarkable reduction of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">30.12</span> cycles per multiplication 
+		  compared to the <font color="gold"><strong>baseline</strong></font> design for such datasets. It's important to note that the <font color="gold"><strong>alternative</strong></font> design incurred higher hardware costs in terms of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">area</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">energy</span> consumption compared to the <font color="gold"><strong>baseline</strong></font> design.
+
+		  <br> Considering the trade-off between cycle reduction and increased hardware use, the <font color="gold"><strong>alternative</strong></font> design proves to be more effective and efficient for applications where technology constraints allow for higher energy and 
+		  area consumption. I anticipate widespread adoption of the <font color="gold"><strong>alternative</strong></font> design in various applications and algorithms, while ensuring compliance with specific technology constraints, such as energy consumption limits.
+
+		  <br> To validate my findings, I will implement both the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> designs, conduct thorough testing, and perform a comprehensive evaluation comparing the two implementations in this project.
+
+		  
+		  <div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Baseline Design</strong></font></h3></div>
+          <br> The <font color="gold"><strong>baseline</strong></font> design performs the following task: given a <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">64-bit req_msg</span> with operands and necessary signals for <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">val/rdy</span> interfaces, it outputs the lower <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32</span> bits result of the multiplication operation to the user. 
+		The algorithm I followed for the multiplication operation is as follows: The function takes <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">2</span> operands, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">a</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">b</span>. If the least significant bit of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">b</span> is <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1</span>, I add operand <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">a</span> to the result. A picture is shown in figure 1 below that illustrates that concept.
+		<br>
+		Then, I shift operand <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">a lift</span>by <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1</span> bit and operand <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">b right</span> by <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1</span> bit. This algorithm is a simple and commonly used method for multiplication. This algorithm is the first one that comes to mind when we think of multiplication and is a good
+one to start with as a shift by 1 bit is expected to consume <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1 cycle</span>, leading to a theoretically simpler design. The
+pseudocode for this algorithm is displayed in figure 2 below.
+	 <div class="column" style="display: flex; align-items: center;">
+  	<img src="assets/images/multiplier_fig1.png" id="rcimage1" 
+   	 style="max-width:70%;border:3px solid #F1D16C; height: 290px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig2.png" id="rcimage2" 
+   	 style="max-width:70%;border:3px solid #F1D16C; height: 290px; object-fit: contain;">
+	</div>
+
+		<br> My code for the <font color="gold"><strong>baseline</strong></font> design implements the logic described in the pseudocode. I use three registers for a, b, and the result. 
+		Additionally, I implement two shifters for logical left shifting and logical right shifting. I also use a multiplexer to add to the result when the least significant bit of 
+		operand b is 1. However, I did not implement the control logic, resulting in a fixed data flow. The control module would send control signals to the datapath module to modify how data 
+		flows into the registers. This includes accepting new values for operand registers, deciding whether to write to the result, and outputting the arithmetic result. The datapath sends 
+		the least significant bit of operand b to the control module for selecting the necessary data flow. The datapath structure is shown in Figure 3.
+        <center>
+		<img src="assets/images/multiplier_fig3.png" id="frst" class="center"
+            width="500" style="max-width:70%;border:4px solid #F1D16C;">
+	</center>     
+       
+		<br> As indicated in the pseudocode, I need to execute a for loop. Therefore, this design requires at least <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 cycles</span> to complete. In practice, my design takes around <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">34-35 cycles</span>, including <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">1 cycle</span>
+		for data acceptance and one cycle to indicate completion. The finite state machine representing this design is shown in Figure 4.
+        <center>
+		<img src="assets/images/multiplier_fig4.png" id="frst" class="center"
+            width="300" style="max-width:80%;border:4px solid #F1D16C;">
+	</center>     
+       
+		<br> The <font color="gold"><strong>baseline</strong></font> design leverages patterns in the given data to optimize execution. In the case where operand b is 0, the hardware would check every bit in b, resulting in <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 cycles</span> 
+		 without adding to the result. To improve efficiency, it would be ideal to handle this case with a single decision not to write to the result instead of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 cycles</span>.
+
+		<br> I employed modularity, which separates the program's functionality into independent modules, such as shifters, registers, and adders. Each module was individually tested for correctness. 
+		Alternatively, hierarchy, an organizational structure based on importance levels, could have been implemented. In the figure 3 diagram, each register has a nearby multiplexer for input direction. 
+		Instead, I could have designed a module implementing this structure and used it three times. This would have allowed for unit testing or staged testing. 
+		In my approach, I tested all functionality at once. By reusing the module three times, I could have identified RTL bugs earlier and achieved more efficient code. 
+		Nonetheless, I ensured that encapsulation (relevant to the val/rdy interface) was a critical component of my design.
+
+		
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Alternative Design</strong></font></h3></div>
+		<br> The main drawback of the <font color="gold"><strong>baseline</strong></font> design is the high latency involved in executing the multiplication operation. In this project, I will present ideas for improving performance by increasing throughput and reducing latency. 
+		Caching and indirection can theoretically be exploited, but they are not permitted. Instead, pipelining can be used for the multiplier, considering the execution of operands to maximize performance. 
+		One approach is to exploit sequential occurrences of zeroes, allowing for shifting by more than 1 bit when possible. This reduces granularity and hardware costs, resulting in higher performance compared to the <font color="gold"><strong>baseline</strong></font> design.
+
+		<br> Another consideration is that pipelining can be employed due to the linear nature of the finite state machine dataflow. By introducing stages between state changes and utilizing the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">val/rdy interface</span>, data flow can be controlled. 
+		However, this approach incurs significant hardware costs, such as multiple registers, multiplexers, shifters, and full adders. Therefore, it may not be an ideal solution unless repeated multiplications are required.
+
+		<br> An <font color="gold"><strong>alternative</strong></font> design idea involves leveraging the structure of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32-bit</span> operands. If there is a repeated sequence of zeroes of length x in the second operand, the current algorithm contributes little to the result register, wasting x cycles. 
+		Instead, shifting x bits can be chosen, saving <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">x-1 cycles</span> in the implementation. The finite state machine for this <font color="gold"><strong>alternative</strong></font> design is illustrated in Figure 5, using the caseZ strategy. The number of cycles varies between 3 and approximately <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">34 or 35</span>, 
+		depending on the input.
+        <center>
+		<img src="assets/images/multiplier_fig5.png" id="frst" class="center"
+            width="400" style="max-width:80%;border:4px solid #F1D16C;">
+	</center>     
+       
+		<br> One advantage of this idea is that it only requires minor changes to the dataflow. A control signal is added to the shifters, and the status signal is expanded to cover all <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 bits</span> of the second operand. 
+		The hardware used in the <font color="gold"><strong>alternative</strong></font> design is similar to the <font color="gold"><strong>baseline</strong></font> design, with additional logic in the shifting process. By shifting by powers of 2, the number of cases to consider is minimized. 
+		However, it should be noted that the alter<font color="gold"><strong>alternative</strong></font>native design consumes more area and energy compared to the <font color="gold"><strong>baseline</strong></font> design, although it theoretically improves efficiency by avoiding unnecessary cycles.
+
+		<br> One of the pros of this idea is that our dataflow gets only a small change. I will just add a control signal to the
+shifters, and I will expand the status signal incorporated in the <font color="gold"><strong>baseline</strong></font> design(which signaled the least significant bit of
+b) to the 32 bits of b as shown in figure 11. As shown for the data flow diagram of the <font color="gold"><strong>alternative</strong></font> design in figure 11 that
+the hardware used in the <font color="gold"><strong>alternative</strong></font> design is pretty similar to that used in the <font color="gold"><strong>baseline</strong></font> design but there is some additional
+logic implemented like additional registers or muxes in the shifting logic.
+	       <center>
+		<img src="assets/images/multiplier_fig11.png" id="frst" class="center"
+            width="500" style="max-width:95%;border:6px solid #F1D16C;">
+	</center>   	
+		<br>
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Testing</strong></font></h3></div>
+		<br> I tested the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> design implementations using provided tests, as well as additional directed and random test cases. The directed and random test cases considered various input types, 
+		such as zeroes, ones, small and large numbers, positive and negative numbers, numbers with masked lower/middle bits, and combinations of these types. The inputs covered values from <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">0</span> to <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 bits</span>, despite the technical 
+		width of all inputs being <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">32 bits</span>. Random tests also included test source/sink delays to check the val/rdy interface.
+
+		<br> A summary table below shows the types of cases I checked. The <font color="gold"><strong>baseline</strong></font> design passed all tests, while the <font color="gold"><strong>alternative</strong></font> design failed some of them. To ensure accurate outputs at expected times, line traces were used for detailed testing. 
+		After analyzing the errors in the <font color="gold"><strong>alternative</strong></font> design, I was able to fix them and make both the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> designs pass the test cases.
+
+		<br> Although the test cases covered all possible scenarios, an <font color="gold"><strong>alternative</strong></font> approach could have involved testing the datapath and control modules separately with individual tests. 
+		However, the test cases created were sufficient to verify the expected behavior, so there was no need for a different approach.
+       <center>
+		<img src="assets/images/multiplier_table1.png" id="frst" class="center"
+            width="700" style="max-width:100%;border:5px solid #F1D16C;">
+	</center>   
+		<br>
+		<div style="text-align: center;"><h3 class="h3 clients-title"> <font color="white"><strong>Evaluation</strong></font></h3></div>
+		<br> After completing the <font color="gold"><strong>baseline</strong></font> and <font color="gold"><strong>alternative</strong></font> implementations, I conducted performance tests on both designs. Using a simulator harness and a given dataset of numbers, I measured the total number of cycles and the average number of cycles per 
+		transaction for each design. To compare their performance under various inputs, I created eight different types of numbers for the simulator, including large numbers, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">masked bits</span>, negative numbers, and combinations thereof.
+
+		<br> The results are summarized in the table below, which clearly shows that the <font color="gold"><strong>baseline</strong></font> design consistently performs at the same level across all input types. This is expected since it implements <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">fixed latency</span>. On the other hand, 
+		the <font color="gold"><strong>alternative</strong></font> design demonstrates better performance than the <font color="gold"><strong>baseline</strong></font> for all input datasets, leveraging consecutive zeros to minimize latency and maximize throughput. Figures 6 to 10 provide visual representations of the program's cycle count.
+
+	<div class="column" style="display: flex;">
+  	<img src="assets/images/multiplier_fig6.png" id="rcimage1; align-items: left;" 
+   	 style="max-width:50%;border:4px solid #F1D16C; height: 150px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig7.png" id="rcimage2" 
+   	 style="max-width:50%;border:4px solid #F1D16C; height: 150px; object-fit: contain;">
+	</div>  
+
+		
+	<div class="column" style="display: flex; align-items: left;">
+  	<img src="assets/images/multiplier_fig8.png" id="rcimage1" 
+   	 style="max-width:53%;border:4px solid #F1D16C; height: 200px; object-fit: contain;">
+ 	 <img src="assets/images/multiplier_fig9.png" id="rcimage2" 
+   	 style="max-width:53%;border:4px solid #F1D16C; height: 200px; object-fit: contain;">
+	</div>
+       
+       <center>
+		<img src="assets/images/multiplier_fig10.png" id="frst" class="center"
+            width="600" style="max-width:100%;border:5px solid #F1D16C;">
+	</center>   
+		<br> Notably, the <font color="gold"><strong>alternative</strong></font> design performed better on the small input dataset compared to the large input dataset. This can be attributed to the possibility of fewer <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">consecutive ones</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">denser inputs</span> in the large dataset, making the design less efficient. 
+		Additionally, the <font color="gold"><strong>alternative</strong></font> design exhibited superior performance with <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">masked numbers</span> due to the guaranteed presence of consecutive zeros. I had considered exploiting <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">consecutive ones</span> in negative numbers by converting them to their positive counterparts, 
+		performing multiplication, and then converting back to negative results. However, I were unable to implement this idea due to time constraints. These concepts, including <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">parallelism</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">pipelining</span>, could be explored in the future to further enhance efficiency, 
+		minimize <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">latency</span>, and improve performance.
+
+		<br> In summary, the <font color="gold"><strong>alternative</strong></font> design outperformed the <font color="gold"><strong>baseline</strong></font> design across all tested input datasets, although the improvement was more significant for small input datasets. The <font color="gold"><strong>alternative</strong></font> design does incur higher hardware costs, requiring additional muxes, adders, 
+		and shifters compared to the <font color="gold"><strong>baseline</strong></font> design. This translates to increased <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">hardware</span>, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">area</span>, and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">energy consumption</span>. The complexity of a design, reflected in the number of <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">logic gates</span> and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">registers</span>, directly affects <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">power consumption</span>.
+
+		<br> Therefore, for applications heavily reliant on masked numbers or small and large inputs that are not negative, implementing the <font color="gold"><strong>alternative</strong></font> design would yield substantial time savings, offsetting the associated <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">hardware</span>, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">area</span>, and energ<span style="color: gold; font-weight: bold; font-style: italic; display: inline;">energy costs</span>. However, 
+		for applications that do not heavily rely on these input datasets, the <font color="gold"><strong>alternative</strong></font> design may not provide significant improvements considering the <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">hardware</span>, <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">area</span>, and <span style="color: gold; font-weight: bold; font-style: italic; display: inline;">energy costs</span>involved.
+  
+       <center>
+		<img src="assets/images/multiplier_table2.png" id="frst" class="center"
+            width="550" style="max-width:100%;border:5px solid #F1D16C;">
+	</center>   
+            
+		
+
+		</p>
+        
+        </section>
+      </article>
+    </div>
+  </main>
+
+	
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
